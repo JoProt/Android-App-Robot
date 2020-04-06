@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private static PrintWriter printWriter;
     int msgCode = 0;
     private static String ip = "192.168.178.40";
-    int port = 5000;
+    int port = 5555;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         MSGTask msgTask = new MSGTask();
         msgTask.execute();
-
-        Toast.makeText(getApplicationContext(),"gesendet:"+code, Toast.LENGTH_SHORT).show();
     }
 
     class MSGTask extends AsyncTask<Void,Void,Void>{
