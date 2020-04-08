@@ -1,9 +1,11 @@
 package com.example.piinterface;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -19,12 +21,17 @@ public class MainActivity extends AppCompatActivity {
     int msgCode = 0;
     private static String ip = "192.168.178.40";
     int port = 5555;
+    ImageView conStat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        conStat = findViewById(R.id.CONNSTST);
+
 
     }
+
+
 
     public void OnClickUp(View v){
         SendToSocket(1);
@@ -54,28 +61,26 @@ public class MainActivity extends AppCompatActivity {
     private void SendToSocket(int code){
         this.msgCode = code;
 
-        MSGTask msgTask = new MSGTask();
-        msgTask.execute();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    socket = new Socket(ip, port);
+                    conStat.setColorFilter(Color.GREEN);
+                    printWriter = new PrintWriter(socket.getOutputStream());
+                    printWriter.write(msgCode);
+                    printWriter.flush();
+                    printWriter.close();
+                    socket.close();
+                    conStat.setColorFilter(Color.RED);
+                }
+                catch (IOException io){
+                    io.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
-    class MSGTask extends AsyncTask<Void,Void,Void>{
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                socket = new Socket(ip, port);
-                printWriter = new PrintWriter(socket.getOutputStream());
-                printWriter.write(msgCode);
-                printWriter.flush();
-                printWriter.close();
-
-                socket.close();
-
-            }
-            catch (IOException io){
-                io.printStackTrace();
-            }
-            return null;
-        }
-    }
 }
