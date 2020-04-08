@@ -31,7 +31,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    socket = new Socket(ip, port);
+                    socket.setKeepAlive(true);
 
+                    conStat.setColorFilter(Color.GREEN);
+
+                    printWriter = new PrintWriter(socket.getOutputStream());
+
+
+                }
+                catch (IOException io){
+                    io.printStackTrace();
+                }
+            }
+        }).start();
+    }
 
     public void OnClickUp(View v){
         SendToSocket(1);
@@ -60,27 +81,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void SendToSocket(int code){
         this.msgCode = code;
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    socket = new Socket(ip, port);
-                    conStat.setColorFilter(Color.GREEN);
-                    printWriter = new PrintWriter(socket.getOutputStream());
-                    printWriter.write(msgCode);
-                    printWriter.flush();
-                    printWriter.close();
-                    socket.close();
-                    conStat.setColorFilter(Color.RED);
-                }
-                catch (IOException io){
-                    io.printStackTrace();
-                }
-            }
-        }).start();
+        printWriter.write(msgCode);
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        try {
+            printWriter.flush();
+            printWriter.close();
+            socket.close();
+            conStat.setColorFilter(Color.RED);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
