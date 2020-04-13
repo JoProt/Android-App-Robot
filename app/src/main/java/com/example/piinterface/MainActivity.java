@@ -49,18 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void initConnection(View v){
-        if(connection.getText().equals("Verbunden")){
-            try {
-                printWriter.close();
-                socket.close();
-                connStat.setColorFilter(Color.RED);
-                connection.setText("Nicht Verbunden");
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
+        if(!socketisAlive) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -77,10 +67,26 @@ public class MainActivity extends AppCompatActivity {
                     } catch (IOException io) {
                         connStat.setColorFilter(Color.RED);
                         connection.setText("Nicht Verbunden");
+                        socketisAlive= false;
                         io.printStackTrace();
                     }
                 }
             }).start();
+        }
+        else{
+            try {
+                printWriter.close();
+                socket.close();
+                connStat.setColorFilter(Color.RED);
+                connection.setText("Nicht Verbunden");
+                socketisAlive = false;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
 
 
 
@@ -132,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
             socket.close();
             connStat.setColorFilter(Color.RED);
             connection.setText("Nicht Verbunden");
+            socketisAlive = false;
+
 
         } catch (IOException e) {
             e.printStackTrace();
