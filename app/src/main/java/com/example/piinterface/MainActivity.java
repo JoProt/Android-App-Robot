@@ -1,12 +1,24 @@
 package com.example.piinterface;
 
+import android.app.ActionBar;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,44 +27,69 @@ import java.net.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "Button Clicked";
     private static Socket socket;
     private static PrintWriter printWriter;
     int msgCode = 0;
     private static String ip = "192.168.178.40";
     int port = 5555;
-    ImageView conStat;
+    boolean socketisAlive = false;
+    ImageView connStat;
+    TextView connection;
+    android.support.v7.widget.Toolbar bar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        conStat = findViewById(R.id.CONNSTST);
 
-
+        connection = (TextView) findViewById(R.id.connection);
+        connStat = (ImageView) findViewById(R.id.CONNSTST);
+        bar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(bar);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    socket = new Socket(ip, port);
-                    socket.setKeepAlive(true);
 
-                    conStat.setColorFilter(Color.GREEN);
+    public void initConnection(View v){
+        if(connection.getText().equals("Verbunden")){
+            try {
+                printWriter.close();
+                socket.close();
+                connStat.setColorFilter(Color.RED);
+                connection.setText("Nicht Verbunden");
 
-                    printWriter = new PrintWriter(socket.getOutputStream());
-
-
-                }
-                catch (IOException io){
-                    io.printStackTrace();
-                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }).start();
+        }
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        socket = new Socket(ip, port);
+                        socket.setKeepAlive(true);
+                        socketisAlive = true;
+                        connStat.setColorFilter(Color.GREEN);
+                        connection.setText("Verbunden");
+
+                        printWriter = new PrintWriter(socket.getOutputStream());
+
+
+                    } catch (IOException io) {
+                        connStat.setColorFilter(Color.RED);
+                        connection.setText("Nicht Verbunden");
+                        io.printStackTrace();
+                    }
+                }
+            }).start();
+
+
+
     }
+
+
+
+
+
 
     public void OnClickUp(View v){
         SendToSocket(1);
@@ -80,8 +117,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void SendToSocket(int code){
-        this.msgCode = code;
-        printWriter.write(msgCode);
+        if (socketisAlive == true){
+            printWriter.flush();
+            printWriter.write(code);
+        }
 
     }
 
@@ -89,10 +128,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         try {
-            printWriter.flush();
             printWriter.close();
             socket.close();
-            conStat.setColorFilter(Color.RED);
+            connStat.setColorFilter(Color.RED);
+            connection.setText("Nicht Verbunden");
 
         } catch (IOException e) {
             e.printStackTrace();
