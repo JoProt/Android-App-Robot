@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements Settings_Dialog.S
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+       // MenuInflater inflater = getMenuInflater();
+        //inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
