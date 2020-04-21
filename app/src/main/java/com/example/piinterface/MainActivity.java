@@ -1,53 +1,96 @@
 package com.example.piinterface;
 
-import android.app.ActionBar;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements Settings_Dialog.Settings_Dialog_Listener {
+// Variablen ----------------------------------------------------
     private static Socket socket;
     private static PrintWriter printWriter;
     int msgCode = 0;
-    private static String ip = "192.168.178.40";
-    int port = 5555;
+    static String ipadress = "";
+    static int portnumber = 0;
     boolean socketisAlive = false;
     ImageView connStat;
     TextView connection;
-    android.support.v7.widget.Toolbar bar;
+    android.support.v7.widget.Toolbar toolbar;
+
+    private final static String SHARED_PREF = "Shared Prefs";
+    private final static String IP_ADRESS ="";
+    private final static String PORT_NUMBER="";
+
+    //--------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //ipadress = "192.168.178.40";
+        //portnumber = 5555;
         connection = (TextView) findViewById(R.id.connection);
         connStat = (ImageView) findViewById(R.id.CONNSTST);
-        bar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(bar);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
+        Load();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
+    // Settings -> On Click Menu
+    public void Settings(View v){
+        Settings_Dialog dialog = new Settings_Dialog();
+        dialog.show(getSupportFragmentManager(), "My Dialog");
+    }
+//---------------------------------------------------------------------
+
+// Interface Dialog
+    @Override
+    public void applySettings(String ip, String port) {
+    ipadress = ip;
+    portnumber = Integer.parseInt(port);
+
+    Save();
+
+}
+//---------------------------------------------------------------------
+public void Save(){
+    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+    SharedPreferences.Editor sEditor = sharedPreferences.edit();
+
+    sEditor.putString(IP_ADRESS, String.valueOf(ipadress));
+    sEditor.putInt(PORT_NUMBER, portnumber);
+    sEditor.apply();
+    Toast.makeText(this,"Data Saved", Toast.LENGTH_SHORT).show();
+}
+public void Load(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+        //ipadress = sharedPreferences.getInt(IP_ADRESS,0);
+            ipadress = "192.168.178.40";
+        portnumber = sharedPreferences.getInt(PORT_NUMBER, 0);
+    Toast.makeText(this, "ip "+ ipadress +" port: "+ portnumber, Toast.LENGTH_SHORT).show();
+
+}
+// Verbindungsaufbau
     public void initConnection(View v){
 
         if(!socketisAlive) {
@@ -55,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        socket = new Socket(ip, port);
+                        socket = new Socket(String.valueOf(ipadress), portnumber);
                         socket.setKeepAlive(true);
                         socketisAlive = true;
                         connStat.setColorFilter(Color.GREEN);
@@ -91,12 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+//---------------------------------------------------------------------
 
-
-
-
-
-
+// Buttons OnClick ----------------------------------------------------
     public void OnClickUp(View v){
         SendToSocket(1);
     }
@@ -121,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
     public void OnClickCirlceRight(View v){
         SendToSocket(8);
     }
+// ----------------------------------------------------------------------
+
 
     private void SendToSocket(int code){
         if (socketisAlive == true){
@@ -133,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        // verbindungs abbau
         try {
             printWriter.close();
             socket.close();
