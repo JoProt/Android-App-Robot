@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity implements Settings_Dialog.S
     android.support.v7.widget.Toolbar toolbar;
 
     private final static String SHARED_PREF = "Shared Prefs";
-    private final static String IP_ADRESS ="";
-    private final static String PORT_NUMBER="";
+    private final static String IP_ADRESSE_KEY = "ip_adresse_key";
+    private final static String PORT_NUMBER_KEY = "port_number_key";
 
     //--------------------------------------------------------------
     @Override
@@ -77,17 +77,16 @@ public void Save(){
     SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
     SharedPreferences.Editor sEditor = sharedPreferences.edit();
 
-    sEditor.putString(IP_ADRESS, String.valueOf(ipadress));
-    sEditor.putInt(PORT_NUMBER, portnumber);
+    sEditor.putString(IP_ADRESSE_KEY, String.valueOf(ipadress));
+    sEditor.putInt(PORT_NUMBER_KEY, portnumber);
     sEditor.apply();
     Toast.makeText(this,"Data Saved", Toast.LENGTH_SHORT).show();
 }
 public void Load(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
-        //ipadress = sharedPreferences.getInt(IP_ADRESS,0);
-            ipadress = "192.168.178.40";
-        portnumber = sharedPreferences.getInt(PORT_NUMBER, 0);
-    Toast.makeText(this, "ip "+ ipadress +" port: "+ portnumber, Toast.LENGTH_SHORT).show();
+        ipadress = sharedPreferences.getString(IP_ADRESSE_KEY,"");
+        portnumber = sharedPreferences.getInt(PORT_NUMBER_KEY, 0);
+        Toast.makeText(this, "ip "+ ipadress +" port: "+ portnumber, Toast.LENGTH_SHORT).show();
 
 }
 // Verbindungsaufbau
