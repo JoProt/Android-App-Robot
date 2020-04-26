@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,9 +40,6 @@ public class MainActivity extends AppCompatActivity implements Settings_Dialog.S
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //ipadress = "192.168.178.40";
-        //portnumber = 5555;
-        connection = (TextView) findViewById(R.id.connection);
         connStat = (ImageView) findViewById(R.id.CONNSTST);
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
@@ -51,15 +49,17 @@ public class MainActivity extends AppCompatActivity implements Settings_Dialog.S
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       // MenuInflater inflater = getMenuInflater();
-        //inflater.inflate(R.menu.main_menu, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
-    // Settings -> On Click Menu
-    public void Settings(View v){
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         Settings_Dialog dialog = new Settings_Dialog();
         dialog.show(getSupportFragmentManager(), "My Dialog");
+
+        return super.onOptionsItemSelected(item);
     }
 //---------------------------------------------------------------------
 
@@ -67,8 +67,12 @@ public class MainActivity extends AppCompatActivity implements Settings_Dialog.S
     @Override
     public void applySettings(String ip, String port) {
     ipadress = ip;
-    portnumber = Integer.parseInt(port);
-
+    if (port == ""){
+        portnumber = 0;
+    }
+    else {
+        portnumber = Integer.parseInt(port);
+    }
     Save();
 
 }
@@ -80,13 +84,13 @@ public void Save(){
     sEditor.putString(IP_ADRESSE_KEY, String.valueOf(ipadress));
     sEditor.putInt(PORT_NUMBER_KEY, portnumber);
     sEditor.apply();
-    Toast.makeText(this,"Data Saved", Toast.LENGTH_SHORT).show();
+    Toast.makeText(this,"Data Saved " + " IP: " + ipadress + " | Port: "+ portnumber, Toast.LENGTH_SHORT).show();
 }
 public void Load(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         ipadress = sharedPreferences.getString(IP_ADRESSE_KEY,"");
         portnumber = sharedPreferences.getInt(PORT_NUMBER_KEY, 0);
-        Toast.makeText(this, "ip "+ ipadress +" port: "+ portnumber, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "ip: "+ ipadress +" port: "+ portnumber, Toast.LENGTH_SHORT).show();
 
 }
 // Verbindungsaufbau
@@ -100,15 +104,12 @@ public void Load(){
                         socket = new Socket(String.valueOf(ipadress), portnumber);
                         socket.setKeepAlive(true);
                         socketisAlive = true;
-                        connStat.setColorFilter(Color.GREEN);
-                        connection.setText("Verbunden");
-
+                        connStat.setBackgroundResource(R.drawable.ic_connected_24dp);
                         printWriter = new PrintWriter(socket.getOutputStream());
 
 
                     } catch (IOException io) {
-                        connStat.setColorFilter(Color.RED);
-                        connection.setText("Nicht Verbunden");
+                        connStat.setBackgroundResource(R.drawable.ic_disconnected_24dp);
                         socketisAlive= false;
                         io.printStackTrace();
                     }
@@ -119,8 +120,7 @@ public void Load(){
             try {
                 printWriter.close();
                 socket.close();
-                connStat.setColorFilter(Color.RED);
-                connection.setText("Nicht Verbunden");
+                connStat.setBackgroundResource(R.drawable.ic_disconnected_24dp);
                 socketisAlive = false;
 
             } catch (IOException e) {
@@ -174,12 +174,11 @@ public void Load(){
     @Override
     protected void onStop() {
         super.onStop();
-        // verbindungs abbau
+        // verbindungsabbau
         try {
             printWriter.close();
             socket.close();
-            connStat.setColorFilter(Color.RED);
-            connection.setText("Nicht Verbunden");
+            connStat.setBackgroundResource(R.drawable.ic_disconnected_24dp);
             socketisAlive = false;
 
 

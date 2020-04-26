@@ -16,7 +16,6 @@
         android:clickable="true"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="PI Interface"
         tools:layout_editor_absoluteX="0dp" />
@@ -167,6 +166,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
 
+        android:background="@drawable/ic_disconnected_24dp"
         android:clickable="true"
         android:onClick="initConnection"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -175,23 +175,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.203"
-        app:srcCompat="@color/colorAccent" />
-
-    <TextView
-        android:id="@+id/connection"
-        android:layout_width="114dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Nicht Verbunden"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201" />
+        />
 
 </android.support.constraint.ConstraintLayout>

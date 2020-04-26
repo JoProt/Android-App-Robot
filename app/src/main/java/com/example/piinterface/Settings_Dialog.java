@@ -3,18 +3,26 @@ package com.example.piinterface;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class Settings_Dialog extends AppCompatDialogFragment {
     private EditText ipdialog;
     private EditText portdialog;
     private Settings_Dialog_Listener listener;
+
+    private final static String SHARED_PREF = "Shared Prefs";
+    private final static String IP_ADRESSE_KEY = "ip_adresse_key";
+    private final static String PORT_NUMBER_KEY = "port_number_key";
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -27,6 +35,9 @@ public class Settings_Dialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String ipshipper = ipdialog.getText().toString();
                         String portshipper = portdialog.getText().toString();
+                        if (portshipper.isEmpty()){
+                            portshipper = "0";
+                        }
                         listener.applySettings(ipshipper,portshipper);
                     }
                 });
