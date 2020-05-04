@@ -1,0 +1,101 @@
+% Encoding: UTF-8
+
+@Article{ChristianRohmann2016,
+  author  = {Christian Rohmann, Heike Jurzik},
+  title   = {Elasticsearch, Logstash \& Kibana},
+  journal = {Linux Magazin},
+  year    = {2016},
+  month   = feb,
+}
+
+@Article{Dorpe2018,
+  author  = {Steven Van Dorpe},
+  title   = {Kakfa-Python explained in 10 lines of code},
+  journal = {towards data science},
+  year    = {2018},
+  month   = aug,
+}
+
+@Article{Docker2017,
+  author  = {Docker},
+  title   = {Get Started},
+  journal = {Docker docs},
+  year    = {2017},
+}
+
+@Article{RedHat2019,
+  author  = {RedHat},
+  title   = {Was versteht man unter CI/CD},
+  journal = {www.redhat.com},
+  year    = {2019},
+}
+
+@Article{Zimmerman2019,
+  author  = {Jan Zimmerman},
+  title   = {Guideline Generelle Anfroderungen an einen MQTT Client},
+  journal = {Daimler AG},
+  year    = {2017},
+  month   = mar,
+}
+
+@Article{Bendel,
+  author  = {Prof. Dr. Oliver Bendel},
+  title   = {Industrie 4.0},
+  journal = {Wirtschaftslexikon},
+}
+
+@Article{Banks2019,
+  author  = {Andrew Banks Ed Briggs Ken Borgendale Rahul Gupta},
+  title   = {MQTT Version 5.0},
+  journal = {oasis-open},
+  year    = {2019},
+}
+
+@Article{Team2015,
+  author  = {HIVEMQ Team},
+  title   = {Quality of Service 0,1 \& 2 - MQTT Essentials: Part 6},
+  journal = {HIVEMQ},
+  year    = {2015},
+}
+
+@Unpublished{Lochmann,
+  author = {Prof. Dr. S. Lochmann},
+  title  = {Vorlesung Kommunikationstechnik},
+}
+
+@Article{Elastic,
+  author  = {Elastic},
+  title   = {Elastic},
+  journal = {https://www.elastic.co/de/},
+}
+
+@Article{IBM2020,
+  author  = {IBM},
+  title   = {IBM Integration Bus - technischer Überblick},
+  journal = {IBM},
+  year    = {2020},
+  month   = jan,
+}
+
+@Article{IBM,
+  author  = {IBM},
+  title   = {Publish/subscribe messaging},
+  journal = {IBM},
+}
+
+@Article{World2018,
+  author  = {Design World},
+  title   = {Request-response vs. publish-subscribe, part 2: Which to use?},
+  journal = {Design World},
+  year    = {2018},
+  month   = nov,
+}
+
+@Article{Foundation2017,
+  author  = {Apache Software Foundation},
+  title   = {Apache Kafka A distributed streaming platform},
+  journal = {kafka.apache.org},
+  year    = {2017},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

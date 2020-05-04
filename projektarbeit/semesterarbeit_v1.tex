@@ -1,0 +1,288 @@
+%-----------------------------------------------------------------------------
+% Schriftgr��e, Layout, Papierformat, Art des Dokumentes
+%-----------------------------------------------------------------------------
+\documentclass[12pt,					% Grundschriftge
+							 oneside,			% einseitiges Dokument
+							 a4paper,			% Papiergr��e
+							 halfparskip,		% Einzug bei einem Absatz
+							 liststotoc,			% Verzeichniss (Abbildungen erc.) in das Inhaltverzeichnis
+							 bibtotoc,			% Literaturverzeichnis ins Inhaltverzeichnis
+							 fleqn,				% Mathematische Formeln linksb�ndig darstellen
+							 pointlessnumbers]	% Punkt am Ende der Nummerierung des Inhaltsverzeichnisses 													entfernen
+							 {scrreprt}
+
+%-----------------------------------------------------------------------------
+% Konstanten festlegen
+%-----------------------------------------------------------------------------
+\newcommand{\VerfasserJ}{Josef Prothmann}
+
+\newcommand{\GeburtstagJ}{16. Dezember 1998}
+
+\newcommand{\GeburtsortJ}{Dannenberg/ Elbe}
+
+\newcommand{\Titel}{Titel}
+\newcommand{\Betreuer}{Betreuer}
+\newcommand{\EmailJ}{j.prothmann@stud.hs-wismar.de}
+
+
+\newcommand{\blankpage}{
+%	\newpage
+%	\thispagestyle{empty}
+%	\mbox{}
+	\newpage
+}
+
+%-----------------------------------------------------------------------------
+% verwendete Pakete
+%-----------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}		% Zeichkodierung , Umlaute erlauben
+\usepackage[T1]{fontenc}				% Wahl des Fonts, bzw. der Kodierung
+\usepackage[english,ngerman]{babel}		% neue deutsche Rechtschreibung verwenden
+\usepackage{graphicx}					% erm�glicht das Einbinden von Grafiken, sehr wichtig!
+\usepackage{fancyhdr}					% f�r formatierte Kopf- und Fu�zeilen
+\usepackage{setspace}					% Package zum Kontrollieren von Leerr�umen
+\usepackage{subfigure}					% erweiterte Darstellung von Bildern
+\usepackage{listings}					% M�glickeit zum Anzeigen von Quelltexten
+\usepackage{color,moreverb}				% Farben
+\usepackage{lmodern}					% bietet neuere Schriften, sieht besser aus im Acrobat Reader
+\usepackage{amsmath,amssymb}			% erweiteter Formelsatz und zus�tzliche Mathe-Symbole
+\usepackage{booktabs}					% professionelle, typographisch richtige Tabellen
+\usepackage{cite}						% f�r LibTex
+%\usepackage{shortvrb}					% f�r Quellcode mit \begin{verbatim}
+\usepackage[binary-units=true]{siunitx}	% Darstellung von Si-Einheiten
+%\usepackage{pdfpages}					% pdf-Seiten einbinden
+\usepackage{enumitem}					% custom itemiziation
+
+
+
+
+
+%-----------------------------------------------------------------------------
+% Fu�notennummerierung nicht f�r jedes kapitel zur�cksetzen
+%-----------------------------------------------------------------------------
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+
+%-----------------------------------------------------------------------------
+% Einstellungen der Seitenr�nder
+%-----------------------------------------------------------------------------
+\usepackage[left=3cm,						% linker Rand
+						right=3cm,			% rechter Rand
+						top=1.5cm,			% oberer Rand
+						bottom=1.5cm,		% unterer Rand
+						includeheadfoot,	% bezieht die Kopf- und Fu�zeile mit ein
+						bindingoffset=0cm]	% Bundsteg
+						{geometry}
+
+
+
+\lstdefinelanguage{HTML5}{
+        language=html,
+        sensitive=true, 
+        alsoletter={<>=-},
+        otherkeywords={
+        % HTML tags
+        <html>, <head>, <title>, </title>, <meta, />, </head>, <body>,
+        <canvas, \/canvas>, <script>, </script>, </body>, </html>, <!, html>, <style>, </style>, ><
+        },  
+        ndkeywords={
+        % General
+        =,
+        % HTML attributes
+        charset=, id=, width=, height=,
+        % CSS properties
+        border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:
+        },  
+        morecomment=[s]{<!--}{-->},
+        tag=[s]
+}
+%-----------------------------------------------------------------------------
+% Daten f�r die Titel des Artikels
+%-----------------------------------------------------------------------------
+\title{Praktikumsbericht}
+\author{\Verfasserj}
+\date{\today{}}
+
+%-----------------------------------------------------------------------------
+% Metadaten in pdf einf�gen
+%-----------------------------------------------------------------------------
+\usepackage[pdftex,
+						pdfauthor={\VerfasserJ},									% Name des Autors
+						pdftitle={\Titel},										% Name der Arbeit
+						pdfcreator={MiKTeX, LaTeX with hyperref and KOMA-Script},	% Von was erzeugt
+						pdfsubject={Praktikumsbericht},							% Was f�r eine Arbeit ist es
+						pdfkeywords={\Titel},
+						plainpages=false,
+						hypertexnames=false,
+						pdfpagelabels]{hyperref}
+
+%-----------------------------------------------------------------------------
+% Schriftarten anpassen
+%-----------------------------------------------------------------------------
+\setkomafont{sectioning}{\rmfamily\bfseries}			% Titelzeilen
+\setkomafont{caption}{\small}							% Schrift f�r Caption
+\setkomafont{captionlabel}{\sffamily\bfseries\small}	% Schrift f�r 'Abbildung'
+\setkomafont{chapterentry}{\small\bfseries}				% Schrift f�r Inhaltsverzeichnis
+\setkomafont{chapter}{\large\bfseries}					% Schrift f�r Kapitel
+\setkomafont{section}{\normalsize}						% Schrift f�r Section
+\setkomafont{subsection}{\normalsize}					% Schrift f�r Subsection
+
+
+
+%-----------------------------------------------------------------------------
+% Farbe f�r Links in PDF-Dokumenten definieren
+%-----------------------------------------------------------------------------
+\definecolor{LinkColor}{rgb}{0,0,0}				% Festlegen einer neuen Farbe
+
+\hypersetup{colorlinks=true,					% farbliche Links
+						breaklinks=true,		% Zeilenumbruch erlauben
+						linkcolor=black,		% Farbe f�r interne Links
+						citecolor=black,		% Farbe f�r Links zum Literaturverzeichnis
+						filecolor=LinkColor,	% Farbe f�r externe Dateilinks
+						menucolor=LinkColor,	%
+						urlcolor=LinkColor}		% Farbe f�r externe Links
+						
+
+
+
+				
+%-----------------------------------------------------------------------------
+% Kopf- und Fusszeile bestimmen
+%-----------------------------------------------------------------------------
+\pagestyle{fancy}	
+\fancyhf{}												% alle Felder l�schen
+\fancypagestyle{plain}{}
+
+% Kopfzeile rechts bzw. au�en
+\fancyhead[R]{\nouppercase{\leftmark}}
+% Linie oben
+\renewcommand{\headrulewidth}{0.5pt}
+% Fu�zeile rechts bzw. au�en
+\fancyfoot[R]{\thepage}
+%-----------------------------------------------------------------------------
+
+%-----------------------------------------------------------------------------
+% Begin des Dokuments
+%-----------------------------------------------------------------------------
+
+\begin{document} 						% Beginn des Dokumentes
+
+	\renewcommand\lstlistingname{Code}
+	\renewcommand\lstlistlistingname{Codeverzeichnis}
+	
+	%% Titel
+	\begin{titlepage}
+		\setlength\headsep{-5mm}
+		\begin{figure}[!h]
+			\begin{minipage}{0.8\textwidth}
+				\textbf{Hochschule Wismar} \\
+				University of Applied Sciences \\
+				Technology, Business and Design \\
+				Fakultät für Ingenieurwissenschaften, Bereich EuI \\
+			\rule{\textwidth}{0.5pt}
+			\end{minipage}
+			\begin{minipage}[r]{0.1\textwidth}
+				\begin{flushright}
+					\includegraphics[height=6\baselineskip]{pictures/HS-Wismar_Logo-FIW_2010-01.jpg}
+				\end{flushright}
+			\end{minipage}
+		\end{figure}
+		\vspace*{6cm}
+		\begin{center}
+			\Huge
+			\textbf{Semesterarbeit im Fach User Interfaces} \\
+			\vspace{2cm}
+			\large \Titel
+			\begin{table*}[b]
+				\begin{tabular}{rl}
+					%Gedruckt am: & \today \\
+					
+					Eingereicht am: &\today \\
+					\\
+					  & \VerfasserJ \\ 
+					& geboren am \GeburtstagJ \\ 
+					%& in \GeburtsortJ \\
+					& Email: \EmailJ \\
+					\\
+
+					Betreuer: & \Betreuer \\
+
+				\end{tabular}
+			\end{table*}
+		\end{center}
+	\end{titlepage}
+
+	\onehalfspacing 					% 1 1/2-zeilig (package 'setspace')
+	
+	%\blankpage	%leeres Blatt zwischen Deckblatt und Inhaltsverzeichnis	
+
+	%-----------------------------------------------------------------------------
+	% Inhaltsverzeichnis
+	%-----------------------------------------------------------------------------	
+	\pdfbookmark[1]{Inhaltsverzeichnis}{toc}	% Inhaltsverzeichnis zu den Lesezeichen hinzuf�gen
+	%\singlespacing 						% 1-zeilig
+	
+	%\onehalfspacing 					% 1 1/2-zeilig (package 'setspace')
+\section*{Abstrakt}
+\section*{Abstract}
+
+\tableofcontents 					% Inhaltverzeichnis einf�gen
+	%-----------------------------------------------------------------------------
+	% Hauptteil
+	%-----------------------------------------------------------------------------	
+	
+\chapter{Einleitung}
+\chapter{Grundlagen}
+\chapter{Ausgangssituation - IST Analyse}
+\chapter{Durchführung}	
+\chapter{Zusammenfassung und Ausblick}	
+
+
+	%-----------------------------------------------------------------------------
+	% Literaturverzeichnis einf�gen, 
+	% Nutzung der BibTeX-Technologie --> literatur.bib 
+	%-----------------------------------------------------------------------------
+
+	
+	\bibliographystyle{unsrtdin}		%  Stil des Literaturverzeichnisses (hier nach DIN 1505)
+	\bibliography{literatur}			% gibt Datei mit der Literatur an
+	
+	\nocite{*}						% damit alle in der DB enthaltende Eintr�ge bearbeitet werden
+	
+
+	%-----------------------------------------------------------------------------
+	% Verzeichnisse
+	%-----------------------------------------------------------------------------
+	\listoffigures						% Bildverzeichnis einf�gen
+
+	%-----------------------------------------------------------------------------
+	% Anhang
+	%-----------------------------------------------------------------------------	
+	\appendix
+	% Auch hier sind Gliederungen aller \chapter, \section
+	
+
+	%-----------------------------------------------------------------------------
+	% Selbstst�ndigkeitserkl�rung
+	%-----------------------------------------------------------------------------	
+	\chapter*{Selbstst\"andigkeitserkl\"arung}
+	\addcontentsline{toc}{chapter}{Selbstst\"andigkeitserkl\"arung}
+	\rhead{Selbstst\"andigkeitserkl\"arung} % rechts oben in der Kopfzeile Chapter darstellen
+	Hiermit erkl\"are ich, dass ich die hier vorliegende Arbeit selbstst\"andig,
+	ohne unerlaubte fremde Hilfe und nur unter Verwendung der aufgef\"uhrten
+	Hilfsmittel angefertigt haben.
+
+	\begin{tabular}{p{10cm}p{13cm}}
+		\\
+  		\\
+  		\\
+  		\\
+  		Wismar, den \today \\
+  		---------------------------------------  & ------------------------ \\
+  		Ort, Datum & Unterschrift
+	\end{tabular}
+	
+
+\chapter*{Code Anhang}
+\end{document}							% Ende des Dokuments
+%-----------------------------------------------------------------------------
