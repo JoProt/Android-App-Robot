@@ -3,18 +3,13 @@ package com.example.piinterface;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import static android.content.Context.MODE_PRIVATE;
 
 
 public class Settings_Dialog extends AppCompatDialogFragment{
@@ -23,22 +18,20 @@ public class Settings_Dialog extends AppCompatDialogFragment{
     private String ip = "";
     private int port = 0;
     private Settings_Dialog_Listener listener;
-    private final static String SHARED_PREF = "Shared Prefs";
-    private final static String IP_ADRESSE_KEY = "ip_adresse_key";
-    private final static String PORT_NUMBER_KEY = "port_number_key";
+
+    private SharedPrefs sharedPreferences;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog, null);
-
+        sharedPreferences = new SharedPrefs(getActivity());
         ipdialog =  view.findViewById(R.id.ipadress);
         portdialog =  view.findViewById(R.id.portnummer);
 
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
-        ip = sharedPreferences.getString(IP_ADRESSE_KEY,"");
-        port = sharedPreferences.getInt(PORT_NUMBER_KEY,0);
+        ip = sharedPreferences.getIP();
+        port = sharedPreferences.getPort();
         ipdialog.setText(ip);
         portdialog.setText(String.valueOf(port));
         builder.setView(view)
@@ -48,6 +41,9 @@ public class Settings_Dialog extends AppCompatDialogFragment{
                     public void onClick(DialogInterface dialog, int which) {
                         String ipshipper = ipdialog.getText().toString();
                         String portshipper = portdialog.getText().toString();
+                        sharedPreferences.setIP(ipshipper);
+                        sharedPreferences.setPort(Integer.parseInt(portshipper));
+
                         if (portshipper.isEmpty()){
                             portshipper = "0";
                         }
