@@ -19,7 +19,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 
-public class MainActivity extends AppCompatActivity implements Settings_Dialog.Settings_Dialog_Listener {
+public class MainActivity extends AppCompatActivity implements Settings_Dialog.Settings_Dialog_Listener{
 // Variablen ----------------------------------------------------
     private static Socket socket;
     private static PrintWriter printWriter;
@@ -38,10 +38,11 @@ public class MainActivity extends AppCompatActivity implements Settings_Dialog.S
     //--------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        connStat = (ImageView) findViewById(R.id.CONNSTST);
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
+        connStat = findViewById(R.id.CONNSTST);
+        toolbar =  findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
         Load();

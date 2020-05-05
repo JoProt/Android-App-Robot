@@ -14,20 +14,33 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static android.content.Context.MODE_PRIVATE;
 
-public class Settings_Dialog extends AppCompatDialogFragment {
+
+public class Settings_Dialog extends AppCompatDialogFragment{
     private EditText ipdialog;
     private EditText portdialog;
+    private String ip = "";
+    private int port = 0;
     private Settings_Dialog_Listener listener;
-
     private final static String SHARED_PREF = "Shared Prefs";
     private final static String IP_ADRESSE_KEY = "ip_adresse_key";
     private final static String PORT_NUMBER_KEY = "port_number_key";
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog, null);
+
+        ipdialog =  view.findViewById(R.id.ipadress);
+        portdialog =  view.findViewById(R.id.portnummer);
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+        ip = sharedPreferences.getString(IP_ADRESSE_KEY,"");
+        port = sharedPreferences.getInt(PORT_NUMBER_KEY,0);
+        ipdialog.setText(ip);
+        portdialog.setText(String.valueOf(port));
         builder.setView(view)
                 .setTitle("Settings")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -41,8 +54,8 @@ public class Settings_Dialog extends AppCompatDialogFragment {
                         listener.applySettings(ipshipper,portshipper);
                     }
                 });
-        ipdialog =  view.findViewById(R.id.ipadress);
-        portdialog =  view.findViewById(R.id.portnummer);
+
+
         return builder.create();
     }
 
@@ -58,7 +71,9 @@ public class Settings_Dialog extends AppCompatDialogFragment {
 
     }
 
-    public interface Settings_Dialog_Listener{
+
+
+      public interface Settings_Dialog_Listener{
         void applySettings(String ip, String port);
     }
 }
