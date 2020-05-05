@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 
 
-public class Settings_Dialog extends AppCompatDialogFragment{
+public class SettingsFragment extends AppCompatDialogFragment{
     private EditText ipdialog;
     private EditText portdialog;
     private String ip = "";
@@ -25,7 +25,7 @@ public class Settings_Dialog extends AppCompatDialogFragment{
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layout_dialog, null);
+        View view = inflater.inflate(R.layout.fragment_settings, null);
         sharedPreferences = new SharedPrefs(getActivity());
         ipdialog =  view.findViewById(R.id.ipadress);
         portdialog =  view.findViewById(R.id.portnummer);

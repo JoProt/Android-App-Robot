@@ -1,7 +1,5 @@
 package com.example.piinterface;
 
-
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,15 +7,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 
 
-public class MainActivity extends AppCompatActivity implements Settings_Dialog.Settings_Dialog_Listener{
+
+public class MainActivity extends AppCompatActivity implements SettingsFragment.Settings_Dialog_Listener{
 // Variablen ----------------------------------------------------
 
     int msgCode = 0;
@@ -53,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements Settings_Dialog.S
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Settings_Dialog dialog = new Settings_Dialog();
-        dialog.show(getSupportFragmentManager(), "My Dialog");
+        SettingsFragment settingsFragment = new SettingsFragment();
+        settingsFragment.show(getSupportFragmentManager(), "My Dialog");
 
         return super.onOptionsItemSelected(item);
     }
