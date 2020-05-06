@@ -32,24 +32,24 @@ public class Connection {
                     } catch (IOException io) {
                         connectionStatus = false;
                         io.printStackTrace();
+                    }catch (Exception e){
+                        connectionStatus = false;
+                        e.printStackTrace();
                     }
                 }
             }).start();
-            connectionStatus = true;
         }
         else{
             try {
                 printWriter.close();
                 socket.close();
-                connectionStatus = false;
 
             } catch (IOException e) {
                 e.printStackTrace();
+            }finally {
+                connectionStatus = false;
             }
         }
-
-
-
         return connectionStatus;
     }
 
