@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 
 public class MainActivity extends AppCompatActivity implements SettingsFragment.Settings_Dialog_Listener {
 // Variablen ----------------------------------------------------
@@ -85,6 +89,7 @@ SECOND: Start Thread and establish Connection to Socket
 
 //SECOND:
         connection = new Connection(ipadress, portnumber);
+
         if (!connected) {
 
             connected = connection.open();  //establish the connection

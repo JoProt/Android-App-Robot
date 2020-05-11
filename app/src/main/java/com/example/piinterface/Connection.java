@@ -1,4 +1,5 @@
 package com.example.piinterface;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -17,8 +18,8 @@ public class Connection {
         this.port = portnummer;
     }
 
-    public boolean open(){
-        if(!connectionStatus){
+    public boolean open() {
+        if (!connectionStatus) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -32,44 +33,54 @@ public class Connection {
                     } catch (IOException io) {
                         connectionStatus = false;
                         io.printStackTrace();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         connectionStatus = false;
                         e.printStackTrace();
                     }
                 }
             }).start();
-        }
-        else{
+        } else {
             try {
                 printWriter.close();
                 socket.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 connectionStatus = false;
             }
         }
         return connectionStatus;
     }
 
-    public void send(int msg) {
-        if (connectionStatus == true) {
-            printWriter.flush();
-            printWriter.write(msg);
+    public void send(final int msg) {
+        if (connectionStatus) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            if (connectionStatus == true) {
+                                printWriter.write(String.valueOf(msg));
+                                printWriter.flush();
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    }
+                }).start();
         }
     }
 
-    public boolean close() {
-        try {
-            printWriter.close();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        public boolean close () {
+            try {
+                printWriter.close();
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            connectionStatus = false;
+            return connectionStatus;
+
         }
-        connectionStatus = false;
-       return connectionStatus;
 
     }
-
-}
