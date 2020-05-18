@@ -54,6 +54,20 @@ public class Connection {
     }
 
     public void send(final int msg) {
+
+        /*
+        * msg == 1 -> UP
+        * msg == 2 -> TOWARDS
+        * msg == 3 -> AWAY
+        * msg == 4 -> DOWN
+        * msg == 5 -> OPEN
+        * msg == 6 -> CLOSE
+        * msg == 7 -> CIRLCE LEFT
+        * msg == 8 -> CIRLCE RIGHT
+        *
+        *
+        *
+        * */
         if (connectionStatus) {
                 new Thread(new Runnable() {
                     @Override

@@ -16,8 +16,6 @@ import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity implements SettingsFragment.Settings_Dialog_Listener {
 // Variablen ----------------------------------------------------
-
-    int msgCode = 0;
     static String ipadress = "";
     static int portnumber = 0;
     ImageView connStat;
@@ -75,19 +73,6 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     }
 
     public void initConnection(View v) {
-/* Verbindungsaufbau
-
-FIRST: send an Ping to the Server to check if server is reachable
-if reachable: continue with SECOND
-if !reachable: Toast.makeText("Server nicht erreichbar")
-
-SECOND: Start Thread and establish Connection to Socket
-
- */
-//FIRST:
-
-
-//SECOND:
         connection = new Connection(ipadress, portnumber);
 
         if (!connected) {
@@ -110,11 +95,11 @@ SECOND: Start Thread and establish Connection to Socket
         connection.send(1);
     }
 
-    public void OnClickRight(View v) {
+    public void OnClickTowards(View v) {
         connection.send(2);
     }
 
-    public void OnClickLeft(View v) {
+    public void OnClickAway(View v) {
         connection.send(3);
     }
 
