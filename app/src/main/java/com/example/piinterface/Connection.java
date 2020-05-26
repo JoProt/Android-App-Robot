@@ -1,8 +1,15 @@
 package com.example.piinterface;
 
+import android.app.Application;
+import android.content.Context;
+import android.system.ErrnoException;
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Connection {
     //Variablen ----------------------------------------------------
@@ -10,7 +17,8 @@ public class Connection {
     private static PrintWriter printWriter;
     static String ip = "";
     static int port = 0;
-    boolean connectionStatus = false;
+    boolean connected = false;
+    boolean isReachable = false;
     // ----------------------------------------------------------
 
     public Connection(String ipadresse, int portnummer) {
@@ -19,27 +27,28 @@ public class Connection {
     }
 
     public boolean open() {
-        if (!connectionStatus) {
-            new Thread(new Runnable() {
+
+            if (connected == false) {
+                new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        socket = new Socket(ip, port);
-                        socket.setKeepAlive(true);
-                        connectionStatus = true;
-                        printWriter = new PrintWriter(socket.getOutputStream());
+                      try {
+                            socket = new Socket(ip, port);
+                            socket.setKeepAlive(true);
+                            connected = true;
+                            printWriter = new PrintWriter(socket.getOutputStream());
+                        } catch (IOException io) {
+                            connected = false;
 
-
-                    } catch (IOException io) {
-                        connectionStatus = false;
-                        io.printStackTrace();
-                    } catch (Exception e) {
-                        connectionStatus = false;
-                        e.printStackTrace();
+                            io.printStackTrace();
+                        } catch (Exception e) {
+                         connected = false;
+                         e.printStackTrace();
+                        }
                     }
-                }
             }).start();
-        } else {
+        }
+        else {  //connected == true -> click on image to disconnect connection
             try {
                 printWriter.close();
                 socket.close();
@@ -47,10 +56,11 @@ public class Connection {
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                connectionStatus = false;
+                connected = false;
             }
         }
-        return connectionStatus;
+        return connected;
+
     }
 
     public void send(final int msg) {
@@ -64,16 +74,13 @@ public class Connection {
         * msg == 6 -> CLOSE
         * msg == 7 -> CIRLCE LEFT
         * msg == 8 -> CIRLCE RIGHT
-        *
-        *
-        *
-        * */
-        if (connectionStatus) {
+        */
+        if (connected) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            if (connectionStatus == true) {
+                            if (connected == true) {
                                 printWriter.write(String.valueOf(msg));
                                 printWriter.flush();
                             }
@@ -85,15 +92,15 @@ public class Connection {
         }
     }
 
-        public boolean close () {
+    public void close () {
             try {
                 printWriter.close();
                 socket.close();
+                connected = false;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            connectionStatus = false;
-            return connectionStatus;
+
 
         }
 

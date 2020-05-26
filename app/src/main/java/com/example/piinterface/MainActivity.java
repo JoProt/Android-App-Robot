@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.io.PrintWriter;
@@ -20,11 +21,11 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     static int portnumber = 0;
     ImageView connStat;
     android.support.v7.widget.Toolbar toolbar;
-    boolean connected = false;
+    boolean connected;
+    Switch grapSwitch;
     // own classes
     SharedPrefs sharedPreferences;
     Connection connection;
-
     //--------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         setContentView(R.layout.activity_main);
         connStat = findViewById(R.id.CONNSTST);
         toolbar = findViewById(R.id.my_toolbar);
+        grapSwitch = findViewById(R.id.grapSwitch);
         setSupportActionBar(toolbar);
+        connected = false;
         Load();
     }
 
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     @Override
     public void applySettings(String ip, String port) {
         ipadress = ip;
-        if (port == "") {
+        if (port.equals("")) {
             portnumber = 0;
         } else {
             portnumber = Integer.parseInt(port);
@@ -75,52 +78,111 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     public void initConnection(View v) {
         connection = new Connection(ipadress, portnumber);
 
-        if (!connected) {
+        if (connected == false) {   //connection not opend
 
-            connected = connection.open();  //establish the connection
-            if(connected) {
+            if(connection.open()) {  //establish the connection. if successfull return true
+                connected = true;
                 connStat.setBackgroundResource(R.drawable.ic_connected_24dp);
             }
-            System.out.println(connected);
-        } else {
-            connected = connection.close();
-            connStat.setBackgroundResource(R.drawable.ic_disconnected_24dp);
-            System.out.println(connected);
+            else{
+                System.out.println(Toast.makeText(this, "Server nicht erreichbar", Toast.LENGTH_SHORT));
+            }
         }
+        else {
+            try {
+                connection.close();
+                connected = false;
+                connStat.setBackgroundResource(R.drawable.ic_disconnected_24dp);
 
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     // Buttons OnClick ----------------------------------------------------
     public void OnClickUp(View v) {
-        connection.send(1);
+        if (connected) {
+            connection.send(1);
+        }
+        else{
+            Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
+            grapSwitch.setChecked(false);
+        }
     }
 
     public void OnClickTowards(View v) {
-        connection.send(2);
+        if (connected) {
+            connection.send(2);
+        }
+        else{
+            Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
+            grapSwitch.setChecked(false);
+        }
     }
 
     public void OnClickAway(View v) {
-        connection.send(3);
+        if (connected) {
+            connection.send(3);
+        }
+        else{
+            Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
+            grapSwitch.setChecked(false);
+        }
     }
 
     public void OnClickDown(View v) {
-        connection.send(4);
+        if (connected) {
+            connection.send(4);
+        }
+        else{
+            Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
+            grapSwitch.setChecked(false);
+        }
     }
 
-    public void OnClickOpen(View v) {
-        connection.send(5);
-    }
+    public void GrapMethod(View view) {
 
-    public void OnClickClose(View v) {
-        connection.send(6);
+        if(grapSwitch.isChecked()==false){
+            if (connected) {
+                connection.send(6);
+            }
+            else{
+                Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
+                grapSwitch.setChecked(false);
+            }
+        }
+        else{
+            if (connected) {
+                connection.send(5);
+            }
+            else{
+                Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
+                grapSwitch.setChecked(false);
+            }
+        }
+
     }
 
     public void OnClickCirlceLeft(View v) {
-        connection.send(7);
+        if (connected) {
+            connection.send(7);
+        }
+        else{
+            Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
+            grapSwitch.setChecked(false);
+        }
     }
 
     public void OnClickCirlceRight(View v) {
-        connection.send(8);
+        if (connected) {
+            connection.send(8);
+        }
+        else{
+            Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
+            grapSwitch.setChecked(false);
+        }
     }
 // ----------------------------------------------------------------------
 
@@ -130,4 +192,6 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         // socket wieder freigeben
         connection.close();
     }
+
+
 }
