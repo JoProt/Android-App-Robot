@@ -1,6 +1,7 @@
 package com.example.piinterface;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -78,20 +79,18 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     public void initConnection(View v) {
         connection = new Connection(ipadress, portnumber);
 
-        if (connected == false) {   //connection not opend
-
-                connection.open();  //establish the connection. if successfull return true
-                connected = true;
+        if (connection.isConnected() == false) {   //connection not opend
+            connection.open();
+            if(connection.isConnected()) {  //establish the connection. if successfull return true
                 connStat.setBackgroundResource(R.drawable.ic_connected_24dp);
-
-
-               // System.out.println(Toast.makeText(this, "Server nicht erreichbar", Toast.LENGTH_SHORT));
-
+            }
+            else{
+                Toast.makeText(this, "Login: Server nicht erreichbar", Toast.LENGTH_SHORT).show();
+            }
         }
         else {
             try {
                 connection.close();
-                connected = false;
                 connStat.setBackgroundResource(R.drawable.ic_disconnected_24dp);
 
             }
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
 
     // Buttons OnClick ----------------------------------------------------
     public void OnClickUp(View v) {
-        if (connected) {
+        if (connection.isConnected()) {
             connection.send(1);
         }
         else{
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     }
 
     public void OnClickTowards(View v) {
-        if (connected) {
+        if (connection.isConnected()) {
             connection.send(2);
         }
         else{
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     }
 
     public void OnClickAway(View v) {
-        if (connected) {
+        if (connection.isConnected()) {
             connection.send(3);
         }
         else{
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     }
 
     public void OnClickDown(View v) {
-        if (connected) {
+        if (connection.isConnected()) {
             connection.send(4);
         }
         else{
@@ -145,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     public void GrapMethod(View view) {
 
         if(grapSwitch.isChecked()==false){
-            if (connected) {
+            if (connection.isConnected()) {
                 connection.send(6);
             }
             else{
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
             }
         }
         else{
-            if (connected) {
+            if (connection.isConnected()) {
                 connection.send(5);
             }
             else{
@@ -166,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     }
 
     public void OnClickCirlceLeft(View v) {
-        if (connected) {
+        if (connection.isConnected()) {
             connection.send(7);
         }
         else{
@@ -176,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     }
 
     public void OnClickCirlceRight(View v) {
-        if (connected) {
+        if (connection.isConnected()) {
             connection.send(8);
         }
         else{
