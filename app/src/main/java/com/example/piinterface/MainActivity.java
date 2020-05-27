@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     static int portnumber = 0;
     ImageView connStat;
     android.support.v7.widget.Toolbar toolbar;
-    boolean connected;
     Switch grapSwitch;
     // own classes
     SharedPrefs sharedPreferences;
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         toolbar = findViewById(R.id.my_toolbar);
         grapSwitch = findViewById(R.id.grapSwitch);
         setSupportActionBar(toolbar);
-        connected = false;
         Load();
     }
 
@@ -77,8 +75,9 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     }
 
     public void initConnection(View v) {
-        connection = new Connection(ipadress, portnumber);
-
+        if(connection == null) {
+            connection = new Connection(ipadress, portnumber);
+        }
         if (connection.isConnected() == false) {   //connection not opend
             connection.open();
             if(connection.isConnected()) {  //establish the connection. if successfull return true
