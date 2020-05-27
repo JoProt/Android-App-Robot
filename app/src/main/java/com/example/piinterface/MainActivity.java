@@ -80,13 +80,13 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
 
         if (connected == false) {   //connection not opend
 
-            if(connection.open()) {  //establish the connection. if successfull return true
+                connection.open();  //establish the connection. if successfull return true
                 connected = true;
                 connStat.setBackgroundResource(R.drawable.ic_connected_24dp);
-            }
-            else{
-                System.out.println(Toast.makeText(this, "Server nicht erreichbar", Toast.LENGTH_SHORT));
-            }
+
+
+               // System.out.println(Toast.makeText(this, "Server nicht erreichbar", Toast.LENGTH_SHORT));
+
         }
         else {
             try {
