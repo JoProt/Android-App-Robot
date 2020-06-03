@@ -15,14 +15,13 @@
 % Konstanten festlegen
 %-----------------------------------------------------------------------------
 \newcommand{\VerfasserJ}{Josef Prothmann}
-
+\newcommand{\EmailJ}{j.prothmann@stud.hs-wismar.de}
 \newcommand{\GeburtstagJ}{16. Dezember 1998}
-
 \newcommand{\GeburtsortJ}{Dannenberg/ Elbe}
 
-\newcommand{\Titel}{Titel}
-\newcommand{\Betreuer}{Betreuer}
-\newcommand{\EmailJ}{j.prothmann@stud.hs-wismar.de}
+\newcommand{\Titel}{Implementierung einer Fernsteuerung für einen 3D gedrukten Roboterarm über einen Rasberry PI 3}
+\newcommand{\Betreuer}{Prof. Dr. H. Litschke}
+
 
 
 \newcommand{\blankpage}{
@@ -76,26 +75,6 @@
 
 
 
-\lstdefinelanguage{HTML5}{
-        language=html,
-        sensitive=true, 
-        alsoletter={<>=-},
-        otherkeywords={
-        % HTML tags
-        <html>, <head>, <title>, </title>, <meta, />, </head>, <body>,
-        <canvas, \/canvas>, <script>, </script>, </body>, </html>, <!, html>, <style>, </style>, ><
-        },  
-        ndkeywords={
-        % General
-        =,
-        % HTML attributes
-        charset=, id=, width=, height=,
-        % CSS properties
-        border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:
-        },  
-        morecomment=[s]{<!--}{-->},
-        tag=[s]
-}
 %-----------------------------------------------------------------------------
 % Daten f�r die Titel des Artikels
 %-----------------------------------------------------------------------------
@@ -126,21 +105,6 @@
 \setkomafont{chapter}{\large\bfseries}					% Schrift f�r Kapitel
 \setkomafont{section}{\normalsize}						% Schrift f�r Section
 \setkomafont{subsection}{\normalsize}					% Schrift f�r Subsection
-
-
-
-%-----------------------------------------------------------------------------
-% Farbe f�r Links in PDF-Dokumenten definieren
-%-----------------------------------------------------------------------------
-\definecolor{LinkColor}{rgb}{0,0,0}				% Festlegen einer neuen Farbe
-
-\hypersetup{colorlinks=true,					% farbliche Links
-						breaklinks=true,		% Zeilenumbruch erlauben
-						linkcolor=black,		% Farbe f�r interne Links
-						citecolor=black,		% Farbe f�r Links zum Literaturverzeichnis
-						filecolor=LinkColor,	% Farbe f�r externe Dateilinks
-						menucolor=LinkColor,	%
-						urlcolor=LinkColor}		% Farbe f�r externe Links
 						
 
 
@@ -195,13 +159,11 @@
 			\large \Titel
 			\begin{table*}[b]
 				\begin{tabular}{rl}
-					%Gedruckt am: & \today \\
 					
 					Eingereicht am: &\today \\
 					\\
-					  & \VerfasserJ \\ 
+					& \VerfasserJ \\ 
 					& geboren am \GeburtstagJ \\ 
-					%& in \GeburtsortJ \\
 					& Email: \EmailJ \\
 					\\
 
@@ -214,7 +176,7 @@
 
 	\onehalfspacing 					% 1 1/2-zeilig (package 'setspace')
 	
-	%\blankpage	%leeres Blatt zwischen Deckblatt und Inhaltsverzeichnis	
+\pagenumbering{roman}
 
 	%-----------------------------------------------------------------------------
 	% Inhaltsverzeichnis
@@ -224,19 +186,27 @@
 	
 	%\onehalfspacing 					% 1 1/2-zeilig (package 'setspace')
 \section*{Abstrakt}
+Diese Arbeit beschäftigt sich mit der Implentierung eines User Interfaces für einen Roboterarm, welcher von einem 3D Drucker hergestellt und über einen Server mit einer Android Applikation zur Fernsteuerung verbunden ist.
 \section*{Abstract}
-
-\tableofcontents 					% Inhaltverzeichnis einf�gen
+This thesis is facing the implementation of an user interface for an robotic arm wich is crafted by a 3D printer and is connected to a server while it is remote controlled by an android application.
+\tableofcontents
+\pagenumbering{arabic} 					% Inhaltverzeichnis einf�gen
 	%-----------------------------------------------------------------------------
 	% Hauptteil
 	%-----------------------------------------------------------------------------	
-	
-\chapter{Einleitung}
-\chapter{Grundlagen}
-\chapter{Ausgangssituation - IST Analyse}
-\chapter{Durchführung}	
-\chapter{Zusammenfassung und Ausblick}	
 
+\chapter{Einleitung}
+Der Benutzerschnittstelle, oder auf Englisch, dem \glqq{}User Interface\grqq{}, wird zunehmend Aufmerksamkeit gewidmet. Dies resultiert aus der laufenden Digitalisierung von Prozessen und der stetigen Übernahme der Computern und Maschinen von menschlichen Aufgaben. Denn selbstverständlich muss zwischen dem Staubsaugroboter aus dem Wohnzimmer oder dem Industrieroboter in der Produktioneine eine Benutzerschnittstelle (HMI\footnote{engl. Human-Machine Interface}) geschaffen werden, damit eine Kontrolle und eine Zuweisung dieser Aufgaben stattfinden kannt. 
+\chapter{Grundlagen}
+\section{Hardware Komponenten}
+\section{3D - Druck}
+\section{Android}
+Android ist ein von Google Inc. entwickeltes und das meist verbreiteste Betriebsystem auf dem deutschen Markt\footnote{Stand März 2020 laufen ca. 80\% der verfügbaren Geräte mit einem Android Betriebssytem -\textit{Quelle: Statista.com, \glqq{}Vergleich der Marktanteile von Android und iOS am Absatz von Smartphones in Deutschland von Januar 2012 bis März 2020\grqq{}, 03.06.2020}\cite{Tenzer2020}}. Mittlerweile findet es nicht mehr nur in Mobiltelefonen, sondern auch in Smartwatches, Tablets und in Fernsehern Verwendung. Die App wurde auf der Version 8.1 (Oreo) entwickelt und getestet.
+\chapter{Konzeption}
+Bei dem Entwurf des Graphical User Interfaces (GUI), wurde sich an gängien Fernsteuerungen aus der Spielebranche orientiert. Die App sollte nur im \glqq{}Landscape\grqq{}-Modus, ausführbarl nutzbar sein. Dabei wurde Wert auf das Einhalten von aktuellen Konventionen, wie einem Settings Menü zum festlegen von Serverport und -ip und CISCO Standart Symbolen wie dem Netzwerk-Symbol geachtet. Des Weiteren wurde mit dem Erstellen von eigenen Scaleable Vector Graphics (SVG) die Intiutivität unterstützt und eine missverständliche Nutzung der Applikation ausgeschlossen.
+\chapter{Implementierung}	
+\chapter{Zusammenfassung}	
+\pagenumbering{roman}
 
 	%-----------------------------------------------------------------------------
 	% Literaturverzeichnis einf�gen, 
@@ -268,7 +238,7 @@
 	\chapter*{Selbstst\"andigkeitserkl\"arung}
 	\addcontentsline{toc}{chapter}{Selbstst\"andigkeitserkl\"arung}
 	\rhead{Selbstst\"andigkeitserkl\"arung} % rechts oben in der Kopfzeile Chapter darstellen
-	Hiermit erkl\"are ich, dass ich die hier vorliegende Arbeit selbstst\"andig,
+	Hiermit erkl\"aren wir, dass wir die hier vorliegende Arbeit selbstst\"andig,
 	ohne unerlaubte fremde Hilfe und nur unter Verwendung der aufgef\"uhrten
 	Hilfsmittel angefertigt haben.
 
@@ -278,11 +248,10 @@
   		\\
   		\\
   		Wismar, den \today \\
-  		---------------------------------------  & ------------------------ \\
+  		---------------------------------------  & ------------------------------ \\
   		Ort, Datum & Unterschrift
 	\end{tabular}
 	
 
-\chapter*{Code Anhang}
 \end{document}							% Ende des Dokuments
 %-----------------------------------------------------------------------------
