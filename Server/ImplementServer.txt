@@ -1,4 +1,6 @@
-#/* Import und Grundeinstellungen */#
+Der Server besteht aus 3 Teilen, der erste
+
+/* Import und Grundeinstellungen */
 import socket
 import RPi.GPIO as GPIO
 import time
@@ -14,7 +16,7 @@ kit.servo[1].angle = servoPosUpper;
 kit.servo[2].angle = servoPosBase;
 kit.servo[3].angle = servoPosFinger;
 
-#/* DataHandling */#
+/* DataHandling */
 def handleData(input):
     number = int(input)
     global servoPosFinger
@@ -71,7 +73,7 @@ def handleData(input):
            kit.servo[1].angle = servoPosUpper;
 
 
-#/* Server Init and Loop*/#
+/* Server Init and Loop*/
 serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serv.bind(('192.168.178.29', 5556))
 serv.listen(5)
@@ -89,3 +91,5 @@ while True:
     conn.close()
     print ('client disconnected')
     
+  
+
