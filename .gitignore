@@ -316,3 +316,15 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/java,android,androidstudio
 .idea/codeStyles/Project.xml
+*.properties
+.idea/caches/build_file_checksums.ser
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/cache.properties
+.gradle/buildOutputCleanup/outputFiles.bin
+.idea/caches/build_file_checksums.ser
+.idea/misc.xml
+.idea/workspace.xml
+app/app.iml
+gradle/wrapper/gradle-wrapper.properties
+local.properties
+User-Interface-Project.iml
