@@ -85,40 +85,39 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     }
 
     public void initConnection(View v) {
-        if(connection == null) {
+        if(Connection.connected == false) {
             connection = new Connection(ipadress, portnumber);
         }
         if (connection.isConnected() == false) {   //connection not opend
             connection.open();
             if(connection.isConnected()) {  //establish the connection. if successfull return true
                 connStat.setBackgroundResource(R.drawable.ic_connected_24dp);
-                up.setEnabled(true);
-                down.setEnabled(true);
-                left.setEnabled(true);
-                right.setEnabled(true);
-                cLeft.setEnabled(true);
-                cRight.setEnabled(true);
+                EnableButtons(true);
             }
             else{
                 Toast.makeText(this, "Login: Server nicht erreichbar", Toast.LENGTH_SHORT).show();
+                connStat.setBackgroundResource(R.drawable.ic_disconnected_24dp);
+                EnableButtons(false);
             }
-        }
-        else {
+        } else {
             try {
                 connection.close();
                 connStat.setBackgroundResource(R.drawable.ic_disconnected_24dp);
-                up.setEnabled(false);
-                down.setEnabled(false);
-                left.setEnabled(false);
-                right.setEnabled(false);
-                cLeft.setEnabled(false);
-                cRight.setEnabled(false);
-
+                EnableButtons(false);
             }
             catch (Exception e){
                 e.printStackTrace();
             }
         }
+    }
+
+    private void EnableButtons(boolean b) {
+        up.setEnabled(b);
+        down.setEnabled(b);
+        left.setEnabled(b);
+        right.setEnabled(b);
+        cLeft.setEnabled(b);
+        cRight.setEnabled(b);
     }
 
     // Buttons OnClick ----------------------------------------------------

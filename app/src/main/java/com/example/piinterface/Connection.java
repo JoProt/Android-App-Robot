@@ -26,7 +26,7 @@ public class Connection {
         return isReachable;
     }
 
-    boolean connected = false;
+    static boolean connected = false;
     boolean isReachable = false;
     // ----------------------------------------------------------
 

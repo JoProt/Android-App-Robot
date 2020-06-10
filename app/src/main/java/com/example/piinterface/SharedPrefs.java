@@ -17,11 +17,11 @@ public class SharedPrefs {
     }
 
     public String getIP(){
-        return sharedPreferences.getString(IP_ADRESSE_KEY,"127.0.0.1");
+        return sharedPreferences.getString(IP_ADRESSE_KEY,"192.168.178.29");
     }
 
     public int getPort (){
-        return sharedPreferences.getInt(PORT_NUMBER_KEY,0);
+        return sharedPreferences.getInt(PORT_NUMBER_KEY,5556);
     }
 
     public void setIP(String ip){
