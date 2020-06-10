@@ -32,7 +32,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/robiarm_hoch"
-
+        android:enabled="false"
         android:onClick="OnClickUp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,6 +52,8 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/robiarm_ran"
         android:onClick="OnClickTowards"
+        android:enabled="false"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.035"
@@ -69,6 +71,8 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/robiarm_weg"
         android:onClick="OnClickAway"
+        android:enabled="false"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.035"
@@ -86,6 +90,8 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/robiarm_runter"
         android:onClick="OnClickDown"
+        android:enabled="false"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.283"
@@ -103,6 +109,8 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/robiarm_circlinks"
         android:onClick="OnClickCirlceLeft"
+        android:enabled="false"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.657"
@@ -120,6 +128,8 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/robiarm_circrechts"
         android:onClick="OnClickCirlceRight"
+        android:enabled="false"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.878"

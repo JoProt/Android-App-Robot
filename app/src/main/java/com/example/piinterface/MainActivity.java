@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     // own classes
     SharedPrefs sharedPreferences;
     Connection connection;
+    Button up,down,left,right,cLeft,cRight;
     //--------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,14 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         grapSwitch = findViewById(R.id.grapSwitch);
         setSupportActionBar(toolbar);
         Load();
+
+        up = findViewById(R.id.buttonUP);
+        down = findViewById(R.id.buttonDOWN);
+        left = findViewById(R.id.buttonLEFT);
+        right = findViewById(R.id.buttonRIGHT);
+        cLeft = findViewById(R.id.buttonCIRCLEFT);
+        cRight = findViewById(R.id.buttonCIRCRIGHT);
+
     }
 
     @Override
@@ -82,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
             connection.open();
             if(connection.isConnected()) {  //establish the connection. if successfull return true
                 connStat.setBackgroundResource(R.drawable.ic_connected_24dp);
+                up.setEnabled(true);
+                down.setEnabled(true);
+                left.setEnabled(true);
+                right.setEnabled(true);
+                cLeft.setEnabled(true);
+                cRight.setEnabled(true);
             }
             else{
                 Toast.makeText(this, "Login: Server nicht erreichbar", Toast.LENGTH_SHORT).show();
@@ -91,6 +107,12 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
             try {
                 connection.close();
                 connStat.setBackgroundResource(R.drawable.ic_disconnected_24dp);
+                up.setEnabled(false);
+                down.setEnabled(false);
+                left.setEnabled(false);
+                right.setEnabled(false);
+                cLeft.setEnabled(false);
+                cRight.setEnabled(false);
 
             }
             catch (Exception e){
@@ -183,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         }
     }
 // ----------------------------------------------------------------------
+
 
     @Override
     protected void onDestroy() {
