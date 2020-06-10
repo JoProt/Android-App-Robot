@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         right.setEnabled(b);
         cLeft.setEnabled(b);
         cRight.setEnabled(b);
+        grapSwitch.setEnabled(b);
     }
 
     // Buttons OnClick ----------------------------------------------------
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
 
     public void OnClickTowards(View v) {
         if (connection.isConnected()) {
-            connection.send(2);
+            connection.send(3);
         }
         else{
             Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
 
     public void OnClickAway(View v) {
         if (connection.isConnected()) {
-            connection.send(3);
+            connection.send(2);
         }
         else{
             Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
@@ -186,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
 
     public void OnClickCirlceLeft(View v) {
         if (connection.isConnected()) {
-            connection.send(7);
+            connection.send(8);
         }
         else{
             Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
@@ -196,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
 
     public void OnClickCirlceRight(View v) {
         if (connection.isConnected()) {
-            connection.send(8);
+            connection.send(7);
         }
         else{
             Toast.makeText(this,"Server nicht verbunden", Toast.LENGTH_SHORT).show();
