@@ -210,16 +210,27 @@ Bei dem Entwurf des Graphical User Interfaces (GUI), wurde sich an gängien Fern
 Hier nun Konzeptidee vom Arm und Servercode
 
 \chapter{Implementierung}	
-Für die Entwicklung einer nativen Android App wird die Entwicklungsumgebung Android Studio benötigt. Des Weiteren wird für die Softwareversionsverwaltung auf die Plattform Github zurückgegriffen, wo der Quellcode des Projektes dokumentiert ist\footnote{https://github.com/JoProt/User-Interface-Project}. Aus dem Grund, dass die Verbindung zu dem Roboter Arm nicht über Bluetooth sondern über das Internet realisiert wurde, ist es notwendig in dem Manifest der Applikation die Internetberechtigung zu erteilen. \\
+Für die Entwicklung einer nativen Android App wird die Entwicklungsumgebung Android Studio benötigt. Des Weiteren wird für die Softwareversionsverwaltung auf die Plattform Github zurückgegriffen, wo der Quellcode des Projektes dokumentiert ist\footnote{https://github.com/JoProt/User-Interface-Project}. Aus dem Grund, dass die Verbindung zu dem Roboter Arm über das Internet realisiert wurde, ist es notwendig in dem Manifest der Applikation die Internetberechtigung zu erteilen. \\
 \begin{lstlisting}
 <uses-permission android:name="android.permission.INTERNET" />
 \end{lstlisting}
 
 Damit ist es möglich auf das mobile Netz des Smartphones zuzugreifen. Um eine Verbindung aufzubauen, benötigt der Client, in diesem Fall die App, die Adresse und den Port des Hosts, in diesem Fall der Server auf dem Raspberry Pi. \\
-Die Parameter für die Verbindung (IP und Port des Hosts), lassen sich dynmaisch (zur Laufzeit) in der App einsehen und verändern. Dadurch ist es in der Theorie möglich, mehrere Roboter nacheinander zu steuern. 
-Damit das ankommende Signal, welches von die Knöpfen und der Switch senden korrekt interpretiert wird, sendet die App einen eindeutigen, einstelligen Integer Code. Dadurch lassen sich die Bewegungen der Motoren auf den korrekten Knopf in der App abbilden. \\ \\
-Da Pfeile als Bewegungsindikatoren im 3D Raum leicht missverstanden werden können wurden eigene SVGs erstellt, welche die Bewegung des Arms verdeutlichen. 
+Die Parameter für die Verbindung (IP und Port des Hosts), lassen sich dynmaisch (zur Laufzeit) in der App einsehen und anpassen. Dadurch ist es in der Theorie möglich, mehrere Roboter nacheinander zu steuern. 
+Damit das ankommende Signal, welches von die Knöpfen und der Switch senden korrekt interpretiert wird, sendet die App einen eindeutigen, einstelligen Integer Code. Dadurch lassen sich die Bewegungen der Motoren durch den korrekten Knopf in der App abbilden. \\ \\
+Da Pfeile als Bewegungsindikatoren im 3D Raum leicht missverstanden werden können, wurden eigene SVGs erstellt, welche die Bewegung des Arms verdeutlichen. \\
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{pictures/robissvg.jpg}
+	\caption{SVG der Knöpfe aus der App \textit{- Quelle: Eigene Darstellung}}
+\end{figure}
+\newpage
+In Abbildung 4.1 sind die einzelnen Grafiken für die jeweilige Bewegung des Roboters aufgelistet, wobei $\leftarrow$ und $\rightarrow$ für Steuerung auf einer horizontal Linie, $\uparrow$ und $\downarrow$ für vertikale Bewegungen und $\curvearrowleft$ und $\curvearrowright$ für Bewegung um die eigene Hochachse verantwortlich sind.
 \chapter{Zusammenfassung}	
+In diesem Projekt haben wir uns mit den Grundlagen der Entwicklung eines User Interfaces auseinandergesetzt und eine ansprechende und intuitiv zu bedienende App entwickelt. Mit Hilfe unseres Wissens aus weiteren Modulen, wie zum Beispiel \glqq{}Programmierung Mobiler Endgeräte\grqq{} und \glqq{}Echtzeit- und Netzwerktprogrammierung\grqq{}, war es uns möglich eine Android Anwendung zu schreiben um einen 3D gedruckten Roboter Arm zusteuern. 
+\\
+In der Zeit der Digitalisierung, in der Computer immer mehr Teil unseres Alltags werden ist es das Ziel, dass die Maschinen für den Menschen eine Arbeitserleichterung und keine Last werden. Desshalb ist es umso wichtiger, mit einem qualitativem User Interface zu arbeiteten. Dieses vergleichsweise kleine Projekt hat uns gezeigt wie aufwendig der Prozess der Gestaltung einer hochwertigen Oberfläche ist.\\ \\
+Gerade dann, wenn eine Anwendung veröffentlicht und von mehreren Menschen genutzt wird, ist es wichtig, dass es das Leben erleichtert und nicht verkompliziert.
 \pagenumbering{roman}
 
 	%-----------------------------------------------------------------------------
