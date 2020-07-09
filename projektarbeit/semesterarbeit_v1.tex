@@ -196,15 +196,29 @@ This thesis is facing the implementation of an user interface for an robotic arm
 	%-----------------------------------------------------------------------------	
 
 \chapter{Einleitung}
-Der Benutzerschnittstelle, oder auf Englisch, dem \glqq{}User Interface\grqq{}, wird zunehmend Aufmerksamkeit gewidmet. Dies resultiert aus der laufenden Digitalisierung von Prozessen und der stetigen Übernahme der Computern und Maschinen von menschlichen Aufgaben. Denn selbstverständlich muss zwischen dem Staubsaugroboter aus dem Wohnzimmer oder dem Industrieroboter in der Produktioneine eine Benutzerschnittstelle (HMI\footnote{engl. Human-Machine Interface}) geschaffen werden, damit eine Kontrolle und eine Zuweisung dieser Aufgaben stattfinden kannt. 
+Der Benutzerschnittstelle, oder auf Englisch, dem \glqq{}User Interface\grqq{}, wird zunehmend Aufmerksamkeit gewidmet. Dies resultiert aus der laufenden Digitalisierung von Prozessen und der stetigen Übernahme der Computern und Maschinen von menschlichen Aufgaben. Denn selbstverständlich muss zwischen dem Staubsaugroboter aus dem Wohnzimmer oder dem Industrieroboter in der Produktioneine eine Benutzerschnittstelle (HMI\footnote{engl. Human-Machine Interface}) geschaffen werden, damit eine Kontrolle und eine Zuweisung dieser Aufgaben stattfinden kann. \\
+In diesem Projekt wurde eine Benutzerschnittstelle für einen Roboterarm entwickelt, mit dem sich dieser steuern lässt. 
 \chapter{Grundlagen}
 \section{Hardware Komponenten}
 \section{3D - Druck}
 \section{Android}
-Android ist ein von Google Inc. entwickeltes und das meist verbreiteste Betriebsystem auf dem deutschen Markt\footnote{Stand März 2020 laufen ca. 80\% der verfügbaren Geräte mit einem Android Betriebssytem -\textit{Quelle: Statista.com, \glqq{}Vergleich der Marktanteile von Android und iOS am Absatz von Smartphones in Deutschland von Januar 2012 bis März 2020\grqq{}, 03.06.2020}\cite{Tenzer2020}}. Mittlerweile findet es nicht mehr nur in Mobiltelefonen, sondern auch in Smartwatches, Tablets und in Fernsehern Verwendung. Die App wurde auf der Version 8.1 (Oreo) entwickelt und getestet.
+Android ist ein von Google Inc. entwickeltes und das meist verbreiteste Betriebsystem auf dem deutschen Markt\footnote{Stand März 2020 laufen ca. 80\% der verfügbaren Geräte mit einem Android Betriebssytem -\textit{Quelle: Statista.com, \glqq{}Vergleich der Marktanteile von Android und iOS am Absatz von Smartphones in Deutschland von Januar 2012 bis März 2020\grqq{}, 03.06.2020}\cite{Tenzer2020}}. Mittlerweile findet es nicht mehr nur in Smartphones, sondern auch in Smartwatches, Tablets und in Fernsehern Verwendung. Die App wurde auf der Version 8.1 (Oreo) entwickelt, ist aber trotzdem für aktuellere Versionen verfügbar.
 \chapter{Konzeption}
-Bei dem Entwurf des Graphical User Interfaces (GUI), wurde sich an gängien Fernsteuerungen aus der Spielebranche orientiert. Die App sollte nur im \glqq{}Landscape\grqq{}-Modus, ausführbarl nutzbar sein. Dabei wurde Wert auf das Einhalten von aktuellen Konventionen, wie einem Settings Menü zum festlegen von Serverport und -ip und CISCO Standart Symbolen wie dem Netzwerk-Symbol geachtet. Des Weiteren wurde mit dem Erstellen von eigenen Scaleable Vector Graphics (SVG) die Intiutivität unterstützt und eine missverständliche Nutzung der Applikation ausgeschlossen.
+Bei dem Entwurf des Graphical User Interfaces (GUI), wurde sich an gängien Fernsteuerungen aus der Spielebranche orientiert. Auf der Linken, sowie auf der rechten, unteren Seite des Displays, lässt sich die Position des Armes im dreidimensionalen Raum (3D) steuern. im oberen Bereich der Anwendung befinden sich Konfigurationspunkte sowie der \glqq{}Switch\grqq{}\footnote{Ein Switch ist in Android ein Kippschalter mit 2 Zuständen}, welcher Steuern des Greifers übernimmt. Die App sollte nur im \glqq{}Landscape\grqq{}-Modus, ausführbar sein. Dabei wurde Wert auf das Einhalten von aktuellen Konventionen, wie einem Settings Menü zum Festlegen von Serverport und -ip und CISCO Standart Symbolen wie dem Netzwerk-Symbol geachtet. Des Weiteren wurde mit dem Erstellen von eigenen Scaleable Vector Graphics (SVG) die Intiutivität unterstützt und eine missverständliche Nutzung der Applikation ausgeschlossen.\\ \\ \\ \\ \\ \\ \\
+
+
+Hier nun Konzeptidee vom Arm und Servercode
+
 \chapter{Implementierung}	
+Für die Entwicklung einer nativen Android App wird die Entwicklungsumgebung Android Studio benötigt. Des Weiteren wird für die Softwareversionsverwaltung auf die Plattform Github zurückgegriffen, wo der Quellcode des Projektes dokumentiert ist\footnote{https://github.com/JoProt/User-Interface-Project}. Aus dem Grund, dass die Verbindung zu dem Roboter Arm nicht über Bluetooth sondern über das Internet realisiert wurde, ist es notwendig in dem Manifest der Applikation die Internetberechtigung zu erteilen. \\
+\begin{lstlisting}
+<uses-permission android:name="android.permission.INTERNET" />
+\end{lstlisting}
+
+Damit ist es möglich auf das mobile Netz des Smartphones zuzugreifen. Um eine Verbindung aufzubauen, benötigt der Client, in diesem Fall die App, die Adresse und den Port des Hosts, in diesem Fall der Server auf dem Raspberry Pi. \\
+Die Parameter für die Verbindung (IP und Port des Hosts), lassen sich dynmaisch (zur Laufzeit) in der App einsehen und verändern. Dadurch ist es in der Theorie möglich, mehrere Roboter nacheinander zu steuern. 
+Damit das ankommende Signal, welches von die Knöpfen und der Switch senden korrekt interpretiert wird, sendet die App einen eindeutigen, einstelligen Integer Code. Dadurch lassen sich die Bewegungen der Motoren auf den korrekten Knopf in der App abbilden. \\ \\
+Da Pfeile als Bewegungsindikatoren im 3D Raum leicht missverstanden werden können wurden eigene SVGs erstellt, welche die Bewegung des Arms verdeutlichen. 
 \chapter{Zusammenfassung}	
 \pagenumbering{roman}
 
