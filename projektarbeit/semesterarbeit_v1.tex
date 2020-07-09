@@ -55,7 +55,6 @@
 
 
 
-
 %-----------------------------------------------------------------------------
 % Fu�notennummerierung nicht f�r jedes kapitel zur�cksetzen
 %-----------------------------------------------------------------------------
@@ -200,14 +199,37 @@ Der Benutzerschnittstelle, oder auf Englisch, dem \glqq{}User Interface\grqq{}, 
 In diesem Projekt wurde eine Benutzerschnittstelle für einen Roboterarm entwickelt, mit dem sich dieser steuern lässt. 
 \chapter{Grundlagen}
 \section{Hardware Komponenten}
+\begin{itemize}
+\item Raspberry Pi
+	Ist ein Einplantinencomputer, welches mit einem Unix Betriebssystem läuft. Der Raspberry PI bietet neben seinen günstigern Preis ein leistungsstarkes , welches durch seine Ansteuerungspins eine ähnlichkeit zu einem Arduino zeigt. Diese Pins machen es möglich externe Compneten anzusteuern oder Informationen zu empfangen. Dadurch sind etliche Projekte wie zum Beispiel: eine Aquariumsanzeige, SmartHome Steuerung und vieles mehr möglich.
+\item Servo Motoren
+	Servomotor sind spezielle Elektromotoren. Diese Motoren besitzen die Möglichkeit die Kontrolle der Winkelposition ihrer Motorwelle sowie der Drehgeschwindigkeit und Beschleunigung erlauben. Sie bestehen aus einem Elektromotor, der zusätzlich mit einem Sensor zur Positionsbestimmung ausgestattet ist.
+\item 16-channel 12-bit Servo Driver
+	Dieses Modul bietet eine Steuerung von mehreren Servo Motoren gleichzeitig. Durch eine externe Spannungquelle sind bis zu 16 5V Servo Motoren anschließbar.
+\end{itemize}
+
 \section{3D - Druck}
+3D Druck ist eine Technologie die seit Jahren von der Industrie als auch von Privatandwendern betrieben, verbessert und erweitert wird. Diese Art des druckens umfasst sämtliche Verfahren in denen Material Schicht auf Schicht gedruckt wird.
+Für dieses Verfahren benötigt man einen sogenannten 3D-Drucker. Ein handelsüblicher 3D-Drucker besitzt in der Standartvariante 4-Achsenbewegungsmotoren, 1 Extudermotoren, ein Heibbett, ein Controllerboard, ein Hotend und einen Rahmen indem alle Bauteile verankert sind, sowie eine Spannungsquelle.
+Für das Drucken von 3D Objekten sind neben einem Drucker auch Druckmaterial sowie ein Slicingprogramm nötig. Je nach Druckerart können verschiedenste Material verwendet werden. Das herkömmlichste Material ist PLA(Polylactide), diese Polymere zählen zu den Polyestern und lassen sich am einfachsten drucken.
+Um 3D Modelle drucken zu können ist neben den Model an sich ein Slicingprogramm nötig. Bei solch einem Programm werden die Modelle auf einem virtuellem Druckbett positioniert und in einzelne Schichten zerlegt. Je nach dem wie groß eine Schicht ist desto detailierter ist das gedruckte Produkt. Aktuelle Drucker sind in der Lage eine schichthöhe von 0,1 mm erreichen.
+Ein Druck wird im 3D Raum aufgebaut. Es gibt 3 Achsen, welche sich horizontal (X, Y Achse) und vertikal bewegen (Z-Achse). Diese Bewegungen werden durch Motoren ausgeführt um das Material in das Hotend zu drücken wird ein Extudermotor benötigt.
+\subsection{Beispieldruck}
+Nachdem der Drucker die Datei, mit dem gesliceten Druckmodel geladen hat, findet die Vorbereitung des druckers automatisch statt.
+Das Druckbett bzw. Heizbett wird auf $60^\circ\text{C}$ vorgeheizt, damit das Material besser an der Druckfläche haftet.
+Währenddessen wird das Hotend auf eine Betriebstemperatur von ca  $215^\circ\text{C}$ erhitzt, damit das Material formbar wird um Scicht für Schicht aufgetragen werden zu können.
+Sind die Endtemperaturen erreicht, werden die einzelnen befehle aus der geslicten Datei geladen. (Diese Beinhaltet befehle für die Motoren)
+Schicht für Schicht wird das Material aufgetragen, welches sich sofort verhärtet.
 \section{Android}
 Android ist ein von Google Inc. entwickeltes und das meist verbreiteste Betriebsystem auf dem deutschen Markt\footnote{Stand März 2020 laufen ca. 80\% der verfügbaren Geräte mit einem Android Betriebssytem -\textit{Quelle: Statista.com, \glqq{}Vergleich der Marktanteile von Android und iOS am Absatz von Smartphones in Deutschland von Januar 2012 bis März 2020\grqq{}, 03.06.2020}\cite{Tenzer2020}}. Mittlerweile findet es nicht mehr nur in Smartphones, sondern auch in Smartwatches, Tablets und in Fernsehern Verwendung. Die App wurde auf der Version 8.1 (Oreo) entwickelt, ist aber trotzdem für aktuellere Versionen verfügbar.
 \chapter{Konzeption}
 Bei dem Entwurf des Graphical User Interfaces (GUI), wurde sich an gängien Fernsteuerungen aus der Spielebranche orientiert. Auf der Linken, sowie auf der rechten, unteren Seite des Displays, lässt sich die Position des Armes im dreidimensionalen Raum (3D) steuern. im oberen Bereich der Anwendung befinden sich Konfigurationspunkte sowie der \glqq{}Switch\grqq{}\footnote{Ein Switch ist in Android ein Kippschalter mit 2 Zuständen}, welcher Steuern des Greifers übernimmt. Die App sollte nur im \glqq{}Landscape\grqq{}-Modus, ausführbar sein. Dabei wurde Wert auf das Einhalten von aktuellen Konventionen, wie einem Settings Menü zum Festlegen von Serverport und -ip und CISCO Standart Symbolen wie dem Netzwerk-Symbol geachtet. Des Weiteren wurde mit dem Erstellen von eigenen Scaleable Vector Graphics (SVG) die Intiutivität unterstützt und eine missverständliche Nutzung der Applikation ausgeschlossen.\\ \\ \\ \\ \\ \\ \\
 
 
-Hier nun Konzeptidee vom Arm und Servercode
+%Hier nun Konzeptidee vom Arm und Servercode
+
+Für die Kommunikation zwischen der Applikation und den ``Roboterarm'' wurde ein Server als Mittelsmann verwendet. Mit diesem Konzept wird eine asynchrone Kommunikation zwischen Server und Client ermöglicht. Der Client welcher als Sender von Daten dient kann dem Server welcher die Daten empfängt direkt etwas mitteilen. Diese Verbindung wird durch einen TCP Socket gewährleistet. Die gesendeten Daten der Applikation werden über die auf dem Raspberry PI vorhanden GPIO Pins an die Servomotoren mittels eines  ``16-channel 12-bit Servo Driver'' übertragen. Dieser Driver ist Notwendig um eine Konstante und Genügende Spannungsquelle für die Motoren zu gewährleisten. Eine direkte Ansteuerung von mehr als einem Motor über die Spannungsquelle des Raspberry PIs ist ungenügend und lässt die Servomotoren zucken oder gar nicht reagieren.
+
 
 \chapter{Implementierung}	
 Für die Entwicklung einer nativen Android App wird die Entwicklungsumgebung Android Studio benötigt. Des Weiteren wird für die Softwareversionsverwaltung auf die Plattform Github zurückgegriffen, wo der Quellcode des Projektes dokumentiert ist\footnote{https://github.com/JoProt/User-Interface-Project}. Aus dem Grund, dass die Verbindung zu dem Roboter Arm über das Internet realisiert wurde, ist es notwendig in dem Manifest der Applikation die Internetberechtigung zu erteilen. \\
