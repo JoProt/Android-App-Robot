@@ -16,11 +16,4 @@
   url    = {https://learn.adafruit.com/adafruit-16-channel-servo-driver-with-raspberry-pi/configuring-your-pi-for-i2c},
 }
 
-@Article{Foundation2020,
-  author  = {Raspberry Pi Foundation},
-  title   = {Raspberry Pi 3 Model B},
-  journal = {www.raspberrypi.org},
-  year    = {2020},
-}
-
 @Comment{jabref-meta: databaseType:bibtex;}

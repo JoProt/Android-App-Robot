@@ -199,27 +199,34 @@ Der Benutzerschnittstelle, oder auf Englisch, dem \glqq{}User Interface\grqq{}, 
 In diesem Projekt wurde eine Benutzerschnittstelle für einen Roboterarm entwickelt, mit dem sich dieser steuern lässt. 
 \chapter{Grundlagen}
 \section{Hardware Komponenten}
-Raspberry PI \newline
-Der Raspberry PI  ist ein Einplantinencomputer, welches mit einem Unix Betriebssystem läuft. Dieser bietet neben seinen günstigen Preis ein leistungsstarkes System, welches durch seine Ansteuerungspins eine Ähnlichkeit zu einem Arduino zeigt. Mit diesen Pins ist, es möglich externe Komponenten anzusteuern oder Informationen zu empfangen. Dadurch sind etliche Projekte wie zum Beispiel: eine Aquariumsanzeige, SmartHome Steuerung und vieles mehr möglich.\newline\newline
-Servo Motoren\newline
-	Servomotor sind spezielle Elektromotoren. Diese Motoren besitzen die Möglichkeit die Kontrolle der Winkelposition ihrer Motorwelle sowie der Drehgeschwindigkeit und Beschleunigung erlauben. Sie bestehen aus einem Elektromotor, der zusätzlich mit einem Sensor zur Positionsbestimmung ausgestattet ist.\newline\newline
-16-channel 12-bit Servo Driver\newline
+Die Hardware in diesem Projekt besteht aus 3 Komponenten. Dem Raspberry PI, den Servmotoren und dem Servo-Treiber, auf diese wird im Folgendem genauer eingegangen. \newline \newline
+\textbf{Raspberry PI} \newline
+Der Raspberry PI  ist ein Einplatinencomputer, mit dem dafür zugeschnittenem Betriebssystem \glqq{}Raspberrien\grqq{}, einem Debian Derivat. Dieser bietet trotz des günstigen Preises ein herrkömmliches, voll funktionsfähiges Computersystem bestehend aus CPU, Arbeitsspeicher, Sekundärspeicher und diversen Schnittstellen wie HDMI, AUX und USB. Mit Hilfe von Ansteuerungspins ist, es möglich externe Komponenten anzuschließen, wie zum Beispiel Sensoren, oder Informationen, eben dieser, zu empfangen. Dadurch sind diverse Projekte, wie zum Beispiel: eine Aquariumsanzeige, eine SmartHome Steuerung, oder ein eigener Roboter möglich.\newline\newline
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.55]{pictures/raspberryPi3b.jpg}
+	\caption{Raspberry Pi Modell 3b \textit{- Quelle: raspberrypi.org\cite{Foundation2020}}}
+\end{figure}
+
+\textbf{Servo Motoren}\newline
+	Servomotor sind spezielle Elektromotoren, welche die Möglichkeit besitzen, die Kontrolle der Winkelposition ihrer Motorwelle sowie der Drehgeschwindigkeit und Beschleunigung erlauben. Sie bestehen aus einem Elektromotor, der zusätzlich mit einem Sensor zur Positionsbestimmung ausgestattet ist.\newline\newline
+\textbf{16-channel 12-bit Servo Driver}\newline
 	Dieses Modul bietet eine Steuerung von mehreren Servo Motoren gleichzeitig. Durch eine externe Spannungquelle sind bis zu 16 5V Servo Motoren anschließbar.
 
 \section{3D - Druck}
-3D Druck ist eine Technologie die seit Jahren von der Industrie als auch von Privatandwendern betrieben, verbessert und erweitert wird. Diese Art des Druckens umfasst sämtliche Verfahren in denen Material Schicht auf Schicht gedruckt wird.
-Für dieses Verfahren benötigt man einen sogenannten 3D-Drucker. Ein handelsüblicher Filament 3D-Drucker besitzt in der Standartvariante 3 bis 4-Achsenbewegungsmotoren, 1 Extudermotoren, ein Heizbett, ein Controllerboard, ein Hotend und einen Rahmen indem alle Bauteile verankert sind, sowie eine Spannungsquelle.
-Für das Drucken von 3D Objekten sind neben einem Drucker auch Druckmaterial sowie ein Slicingprogramm nötig. Je nach Druckerart können verschiedenste Material verwendet werden. Das am meisten verwendetest Material ist PLA(Polylactide), diese Polymere zählen zu den Polyestern und lassen sich am einfachsten drucken.
-Um 3D Modelle drucken zu können ist neben den Model an sich ein Slicingprogramm nötig. Bei solch einem Programm werden die Modelle auf einem virtuellem Druckbett positioniert und in einzelne Schichten zerlegt. Je nach dem wie groß eine Schicht ist desto detaillierter ist das gedruckte Produkt. Aktuelle Drucker sind in der Lage eine Schichthöhe von 0,1 mm erreichen.
-Ein Druck wird im 3D Raum aufgebaut. Es gibt 3 Achsen, welche sich horizontal (X, Y Achse) und vertikal bewegen (Z-Achse). Diese Bewegungen werden durch Motoren ausgeführt um das Material in das Hotend zu drücken wird ein Extudermotor benötigt.
-
-In dieser Beschreibung wurden nur Fused Deposition Modeling / Fused Filament Fabrication (FDM / FFF) besprochen daneben gibt es noch andere Druckerarten, wie zum Beispiel Stereolithographie (STL / SLA) bei dem Flüssigharz und UV-Strahlen verwendet werden um Modelle zu drucken.
+3D Druck ist eine Technologie die seit Jahren von der Industrie als auch von Privatandwendern betrieben, verbessert und erweitert wird. Diese Art des Druckens umfasst sämtliche Verfahren in denen Material Schicht auf Schicht aufeinander aufbauend gedruckt wird.
+Für dieses Verfahren wird ein 3D Drucker benötigt. Ein handelsüblicher Filament(\textbf{Evt hier mal kurz erklären was das ist? 2 wörter reichen}) Drucker besitzt in der Standartvariante drei bis vier Achsenbewegungsmotoren, einen Extudermotoren, ein Heizbett, ein Controllerboard, ein Hotend und einen Rahmen indem alle Bauteile verankert sind, sowie eine Spannungsquelle.
+Für das Drucken von 3D Objekten sind neben einem Drucker auch Druckmaterial sowie ein Slicingprogramm nötig. Je nach Druckerart können verschiedenste Material verwendet werden. Das am meisten verwendetest Material ist PLA(Polylactide), diese Polymere zählen zu den Polyestern und lassen sich am einfachsten drucken. \\
+In dem Slicingprogramm werden die Modelle auf einem virtuellem Druckbett positioniert und in einzelne Schichten zerlegt. Je nach dem wie groß(\textbf{was bedeutet hier groß?}) eine Schicht ist desto, detaillierter ist das gedruckte Produkt. Aktuelle Drucker sind in der Lage eine Schichthöhe von 0,1 mm erreichen(\textbf{diesen gesamten ausdruck vielleicht als fußnote zur erklären was du mit groß meinst?}). \\
+Der Druckkopf, aus dem das heiße Fillament kommt, bewegt sich im dreidimensionalen Raum( drei Achsen, X,Y,Z). Diese Bewegungen werden durch die Achsbewegungsmotoren ausgeführt. Um das Material in das Hotend(\textbf{Was ist das Hotend?}) zu drücken wird ein Extudermotor benötigt.
+\newpage
+In dieser Beschreibung wurden Fused Deposition Modeling / Fused Filament Fabrication (FDM / FFF) besprochen daneben gibt es noch andere Druckerarten, wie zum Beispiel Stereolithographie (STL / SLA) bei dem Flüssigharz und UV-Strahlen verwendet werden um Modelle zu drucken.
 \subsection{Beispieldruck PLA}
 Nachdem der Drucker die Datei, mit dem gesliceten Druckmodel geladen hat, findet die Vorbereitung des Druckers automatisch statt.
 Das Druckbett bzw. Heizbett wird auf $60^\circ\text{C}$ vorgeheizt, damit das Material besser an der Druckfläche haftet.
-Währenddessen wird das Hotend auf eine Betriebstemperatur von ca  $215^\circ\text{C}$ erhitzt, damit das Material formbar wird um Schicht für Schicht aufgetragen werden zu können.
-Sind die Endtemperaturen erreicht, werden die einzelnen befehle aus der geslicten Datei geladen. (Diese Beinhaltet befehle für die Motoren)
-Schicht für Schicht wird das Material aufgetragen, welches sich sofort verhärtet.
+Währenddessen wird das Hotend auf eine Betriebstemperatur von ca  $215^\circ\text{C}$ erhitzt, damit das Material formbar wird und Schicht für Schicht aufgetragen werden kann.
+Sind die Endtemperaturen erreicht, werden die einzelnen Befehle aus der geslicten Datei geladen (Diese beinhaltet Befehle für die Motoren).
+Die gedruckte Schicht im Druckbett verhärtet sofort, sodass die nächst höhere Schicht auf eine stabile Oberfläche gesetzt werden kann.
 \newpage
 \section{Android}
 Android ist ein von Google Inc. entwickeltes und das meist verbreiteste Betriebsystem auf dem deutschen Markt\footnote{Stand März 2020 laufen ca. 80\% der verfügbaren Geräte mit einem Android Betriebssytem -\textit{Quelle: Statista.com, \glqq{}Vergleich der Marktanteile von Android und iOS am Absatz von Smartphones in Deutschland von Januar 2012 bis März 2020\grqq{}, 03.06.2020}\cite{Tenzer2020}}. Mittlerweile findet es nicht mehr nur in Smartphones, sondern auch in Smartwatches, Tablets und in Fernsehern Verwendung. Die App wurde auf der Version 8.1 (Oreo) entwickelt, ist aber trotzdem für aktuellere Versionen verfügbar.
@@ -228,7 +235,7 @@ Bei dem Entwurf des Graphical User Interfaces (GUI), wurde sich an gängigen Fer
 
 %Hier nun Konzeptidee vom Arm und Servercode
 
-Für die Kommunikation zwischen der Applikation und den ``Roboterarm'' wurde ein Server als Mittelsmann verwendet. Mit diesem Konzept wird eine asynchrone Kommunikation zwischen Server und Client ermöglicht. Der Client welcher als Sender von Daten dient kann dem Server welcher die Daten empfängt direkt etwas mitteilen. Diese Verbindung wird durch einen TCP Socket gewährleistet. Die gesendeten Daten der Applikation werden über die auf dem Raspberry PI vorhanden GPIO Pins an die Servomotoren mittels eines  ``16-channel 12-bit Servo Driver'' übertragen. Dieser Driver ist Notwendig um eine Konstante und Genügende Spannungsquelle für die Motoren zu gewährleisten. Eine direkte Ansteuerung von mehr als einem Motor über die Spannungsquelle des Raspberry PI's ist ungenügend und lässt die Servomotoren zucken oder gar nicht reagieren.
+Für die Kommunikation zwischen der Applikation und dem \glqq{}Roboterarm\grqq{} wurde ein Server als Verbindungsstück verwendet. Mit diesem Konzept wird eine asynchrone Kommunikation zwischen Server und Client ermöglicht. Der Client welcher als Sender von Daten dient, kann dem Server, welcher die Daten empfängt, direkt Daten übermitteln. Diese Verbindung wird durch einen TCP Socket gewährleistet. Die gesendeten Informationen der Applikation werden über die auf dem Raspberry PI vorhanden GPIO Pins, an die Servomotoren mittels eines  \glqq{}16-channel 12-bit Servo Driver\grqq{} übertragen. Dieser Treiber ist Notwendig um eine konstante und ausreichende Spannungsquelle für die Motoren zu gewährleisten. Eine direkte Ansteuerung von mehr als einem Motor über die Spannungsquelle des Raspberry PI's ist ungenügend und lässt die Servomotoren zucken oder gar nicht reagieren.
 
 
 \chapter{Implementierung}	
@@ -251,14 +258,13 @@ Da Pfeile als Bewegungsindikatoren im 3D Raum leicht missverstanden werden könn
 In Abbildung 4.1 sind die einzelnen Grafiken für die jeweilige Bewegung des Roboters aufgelistet, wobei $\leftarrow$ und $\rightarrow$ für Steuerung auf einer horizontal Linie, $\uparrow$ und $\downarrow$ für vertikale Bewegungen und $\curvearrowleft$ und $\curvearrowright$ für Bewegung um die eigene Hochachse verantwortlich sind.
 
 \section{Roboterarm}
-Der Arm wurde auf einem selbstgebauten 3D-Drucker über 25h gedruckt und hat durch die Ungenauigkeit des Druckers und Flaschen Einstellungen einen leichten Verzug in den Bauteilen. Das bedeutet die Greifzange hat ein leichtes Problem beim schließen, dies würde sich mit neuen gedruckten Greifzangen Bauteilen beheben lassen. Aus technischen Gründen ist dies nicht mehr möglich gewesen, da der Drucker einen defekt nach dem fertigstellen des Armes erlitten hat.
-
-Der Arm hat an 4 Punkten die Servomotoren implementiert und kann sich dadurch wie in Abschnitt 4.1 beschrieben in mehrere Richtungen bewegen. Die Motorsteuerung funktioniert über ein 16-channel 12-bit Servo Driver-Board, genaueres zu diesem Bauteil ist unter dem Abschnitt 2.1 zu lesen.
+Der Arm wurde von einem selbstgebauten 3D-Drucker über 25 Stunden gedruckt und hat durch die Ungenauigkeit des Druckers und falschen Einstellungen einen leichten Verzug in den Bauteilen. Das bedeutet, die Greifzange hat ein leichtes Problem beim Schließen, dies würde sich mit neuen gedruckten Greifzangen-Bauteilen beheben lassen. Aus technischen Gründen ist dies nicht mehr möglich gewesen, da der Drucker derzeit einem technischen Defekt unterliegt.
+Der Arm hat an vier Punkten die Servomotoren implementiert und kann sich dadurch wie in Abschnitt 4.1 beschrieben in mehrere Richtungen bewegen. Die Motorsteuerung funktioniert über ein 16-channel 12-bit Servo Driver-Board, genaueres zu diesem Bauteil ist unter dem Abschnitt 2.1 zu lesen.
 \newpage
 \section{Server}
-Für den Server und die Ansteuerung des Roboterarms wurde die Programmiersprache Python verwendet. Die Verbindung zum Server wird über eine Socket Verbindung gewährleistet. Das bedeutet, es wird direkte Verbindung zwischen Client und Server aufgebaut die solange aktiv ist bis einer der beiden Partner die Verbindung trennt. Eine Aktive Trennung findet in dieser Implementierung nur den Client statt. Wie im folgenden Codeauszug zu sehen ist, wird eine Verbindung aufgebaut, gehalten und es werden Daten empfangen, welche an die Roboterarmsteuerungsmethode weitergeleitet werden.
+Für den Server und die Ansteuerung des Roboterarms wurde die Programmiersprache Python verwendet. Die Verbindung zum Server wird über eine Socket Verbindung gewährleistet, das bedeutet, es wird eine direkte Verbindung zwischen Client und Server aufgebaut, die solange aktiv ist bis einer der beiden Partner die Verbindung trennt. Eine Aktive Trennung findet in dieser Implementierung nur durch den Client statt. Wie im folgenden Codeauszug zu sehen ist, wird eine Verbindung aufgebaut, gehalten. Es werden Daten empfangen, welche an die Roboterarmsteuerungsmethode weitergeleitet werden.
 \begin{lstlisting}
-#/* Server Init and Loop*/#
+# Server Init and Loop ---
 serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serv.bind(('192.168.178.29', 5556))
 serv.listen(5)
@@ -278,7 +284,7 @@ while True:
 \end{lstlisting}
 
 
-In der Armsteuerung wird überprüft welche Daten gesendet wurden. Intern wurde sich zuerst über eine passende Kommunikation ausgetauscht und danach wurden die jeweiligen Bewegungen per Zahl definiert. Beispielsweise wird Basis, welche das drehen nach links und rechts ermöglicht, durch Integerwerte 7(links) und 8(rechts) definiert. Im folgenden Codeausschnitt wurde vorher überprüft ob es sich wirklich um eine Zahl handelt, dann wurde sie geparst und per ``if''-Abfrage wird nun geprüft um welche Zahl es sich handelt. 
+In der Armsteuerung wird überprüft, welche Daten gesendet wurden. Intern wurde sich zuerst über eine passende Kommunikation ausgetauscht und danach wurden die jeweiligen Bewegungen per Zahl definiert. Beispielsweise wird Basis, welche das drehen nach links und rechts ermöglicht, durch Integerwerte 7(links) und 8(rechts) definiert. Im folgenden Codeausschnitt wurde vorher überprüft ob es sich wirklich um eine Zahl handelt, dann wurde sie geparst und per \glqq{}if\grqq{}-Abfrage wird nun geprüft um welche Zahl es sich handelt. 
 \newpage
 \begin{lstlisting}
  if(number==8):
@@ -294,10 +300,11 @@ In der Armsteuerung wird überprüft welche Daten gesendet wurden. Intern wurde 
 Hierbei ist zu erkennen, dass der Mindest- und der Maximalwinkel des Servomoters als auch die Schrittgröße für einen Eingangssignal vorher definiert wurden. Dies dient dazu Fehler für die Motoren zu verhindern.  Mithilfe des ``ServoKit''-Packages ist es möglich eine vorgefertigte Ansteuerungsmethode zu verwenden.
 
 
-Wenn ein Datenstrom vom Client gesendet wird, wird diese durch den Server validiert und weitergereicht um einen Motor des Armes zu bewegen.
+Wenn ein Datenstrom vom Client gesendet wird, wird dieser durch den Server validiert und weitergereicht um einen Motor des Armes zu bewegen.
 
 
-\section{Fehlschläge}
+\chapter{Fehlschläge}
+(\textbf{hier musst du unbedingt noch Quellen angeben. Du sagst selbst im Text das du vorher kein Wissen hattest, aber worher hast du das denn jetzt genimmen? such bitte noch min. eine weitere Quelle raus. am Besten 2.  Wenn du willst, kannst du mein Raspberry Pi Buch auch als Quelle nutzen dann gebe ich dir die daten durch.}) \\ \\ \\ \\
 Für die Server-Arm Steuerung wurden mehrere Ansätze ausgetestet. Zum einen war das Wissen wie solche Motoren und Systeme funktionieren nicht vorhanden. Dadurch sind Probleme wie zuckende, nicht reagierende Servomotoren und Fehlansteuerungen entstanden. Erst bei der Betrachtung das die Spannungsquelle ungenügend sein könnte wurde recherchiert\cite{I2C} und Lösungen betrachtet. 
 
 Neben den Motorproblemen stellte die Verbindung eine kleines Problem dar. Die Fernsteuerung über das Internet war ein Plan der dieses Projekt bereichern sollte, auch wenn es keinen Mehrwert bietet. Erst als beim betrachten des Portforwardings, konnte festgestellt werden das der genutzte Port freigeschaltet werden muss.

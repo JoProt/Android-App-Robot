@@ -1,0 +1,17 @@
+\babel@toc {ngerman}{}
+\contentsline {chapter}{\numberline {1}Einleitung}{2}{chapter.4}% 
+\contentsline {chapter}{\numberline {2}Grundlagen}{3}{chapter.6}% 
+\contentsline {section}{\numberline {2.1}Hardware Komponenten}{3}{section.7}% 
+\contentsline {section}{\numberline {2.2}3D - Druck}{4}{section.9}% 
+\contentsline {subsection}{\numberline {2.2.1}Beispieldruck PLA}{5}{subsection.10}% 
+\contentsline {section}{\numberline {2.3}Android}{6}{section.11}% 
+\contentsline {chapter}{\numberline {3}Konzeption}{7}{chapter.13}% 
+\contentsline {chapter}{\numberline {4}Implementierung}{8}{chapter.15}% 
+\contentsline {section}{\numberline {4.1}Client}{8}{section.16}% 
+\contentsline {section}{\numberline {4.2}Roboterarm}{9}{section.21}% 
+\contentsline {section}{\numberline {4.3}Server}{10}{section.22}% 
+\contentsline {chapter}{\numberline {5}Fehlschl\IeC {\"a}ge}{12}{chapter.51}% 
+\contentsline {chapter}{\numberline {6}Zusammenfassung}{i}{chapter.52}% 
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{ii}{chapter*.53}% 
+\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{iii}{chapter*.54}% 
+\contentsline {chapter}{Selbstst\"andigkeitserkl\"arung}{iv}{chapter*.55}% 
