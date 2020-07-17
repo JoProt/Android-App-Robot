@@ -25,7 +25,7 @@
 \newcommand{\GeburtsortD}{Rostock}
 
 
-\newcommand{\Titel}{Implementierung einer Fernsteuerung für einen 3D gedruckten Roboterarm über einen Raspberry PI 3}
+\newcommand{\Titel}{Entwicklung eines User Interfaces für einen serverbasierten, 3D gedruckten Roboterarm}
 \newcommand{\Betreuer}{Prof. Dr. H. Litschke}
 
 
@@ -196,7 +196,7 @@
 \section*{Abstrakt}
 Diese Arbeit beschäftigt sich mit der Implentierung eines User Interfaces für einen Roboterarm, welcher von einem 3D Drucker hergestellt und über einen Server mit einer Android Applikation zur Fernsteuerung verbunden ist.
 \section*{Abstract}
-This thesis is facing the implementation of an user interface for an robotic arm wich is crafted by a 3D printer and is connected to a server while it is remote controlled by an android application.
+This thesis is facing the issue of implementation an user interface for an robotic arm wich is crafted by a 3D printer and is connected to a server while it is remote controlled by an android application.
 \tableofcontents
 \pagenumbering{arabic} 					% Inhaltverzeichnis einf�gen
 	%-----------------------------------------------------------------------------
@@ -204,8 +204,9 @@ This thesis is facing the implementation of an user interface for an robotic arm
 	%-----------------------------------------------------------------------------	
 
 \chapter{Einleitung}
-Der Benutzerschnittstelle, oder auf Englisch, dem \glqq{}User Interface\grqq{}, wird zunehmend Aufmerksamkeit gewidmet. Dies resultiert aus der laufenden Digitalisierung von Prozessen und der stetigen Übernahme der Computern und Maschinen von menschlichen Aufgaben. Denn selbstverständlich muss zwischen dem Staubsaugroboter aus dem Wohnzimmer oder dem Industrieroboter in der Produktion eine  Benutzerschnittstelle (HMI\footnote{engl. Human-Machine Interface}) geschaffen werden, damit eine Kontrolle und eine Zuweisung dieser Aufgaben stattfinden kann. \\
-In diesem Projekt wurde eine Benutzerschnittstelle für einen Roboterarm entwickelt, mit dem sich dieser steuern lässt. 
+Die Benutzerschnittstelle (engl. User Interface (UI)) gewinnt zunehmend an Aufmerksamkeit. Dies resultiert aus der laufenden Digitalisierung von Prozessen und der stetigen Übernahme der Computer und Maschinen von menschlichen Aufgaben. \\
+Mittlerweile sind UIs nicht mehr wegzudenken, denn sie treten in Form von Applikationen (App) auf dem Smartphone, als Terminal auf dem PC oder als Spracheingabe im Auto auf.
+In diesem Projekt wurde eine Benutzerschnittstelle für einen Roboterarm als Android App entwickelt, mit dem sich dieser steuern lässt. 
 \chapter{Grundlagen}
 \section{Hardware Komponenten}
 Die Technische Hardware in diesem Projekt besteht aus 3 Komponenten. Dem Raspberry PI, den Servmotoren und dem Servo-Treiber, auf diese wird im Folgendem genauer eingegangen. \newline \newline
@@ -218,7 +219,7 @@ Der Raspberry PI  ist ein Einplatinencomputer, mit dem dafür zugeschnittenem Be
 \end{figure}
 
 \textbf{Servo Motoren}\newline
-	Servomotor sind spezielle Elektromotoren, welche die Möglichkeit besitzen, die Kontrolle der Winkelposition ihrer Motorwelle sowie der Drehgeschwindigkeit und Beschleunigung erlauben. Sie bestehen aus einem Elektromotor, der zusätzlich mit einem Sensor zur Positionsbestimmung ausgestattet ist.  Die durch den Sensor ermittelte Drehposition der Motorwelle wird kontinuierlich an eine meist außerhalb des eigentlichen Motors angebrachte Regelelektronik übermittelt, den so genannten Servoregler, welcher die Bewegung des Motors entsprechend einem oder mehreren einstellbaren Sollwerten, als auch Soll-Winkelposition der Welle oder Solldrehzahl in einem Regelkreis regelt.	
+	Servomotoren sind spezielle Elektromotoren, welche die Möglichkeit besitzen, die Winkelposition ihrer Motorwelle, sowie die Drehgeschwindigkeit und Beschleunigung zu kontrollieren. Sie bestehen aus einem Elektromotor, der zusätzlich mit einem Sensor zur Positionsbestimmung ausgestattet ist.  Die durch den Sensor ermittelte Drehposition der Motorwelle wird kontinuierlich an eine, meist außerhalb des eigentlichen Motors angebrachte, Regelelektronik übermittelt, den so genannten Servoregler, welcher die Bewegung des Motors entsprechend einem oder mehreren einstellbaren Sollwerten, als auch Soll-Winkelposition der Welle oder Solldrehzahl in einem Regelkreis regelt.	
 	\newline\newline	
 \textbf{16-channel 12-bit Servo Driver}\newline
 	Dieses Modul bietet eine Steuerung von mehreren Servo Motoren gleichzeitig. Durch eine externe Spannungquelle sind bis zu 16 5V Servo Motoren anschließbar.
@@ -237,32 +238,34 @@ Währenddessen wird das Hotend auf eine Betriebstemperatur von ca  $215^\circ\te
 Sind die Endtemperaturen erreicht, werden die einzelnen Befehle aus der geslicten Datei geladen (Diese beinhaltet Befehle für die Motoren).
 Die gedruckte Schicht im Druckbett verhärtet sofort, sodass die nächst höhere Schicht auf eine stabile Oberfläche gesetzt werden kann.
 \section{Android}
-Android ist ein von Google Inc. entwickeltes und das meist verbreiteste Betriebsystem auf dem deutschen Markt\footnote{Stand März 2020 laufen ca. 80\% der verfügbaren Geräte mit einem Android Betriebssytem -\textit{Quelle: Statista.com, \glqq{}Vergleich der Marktanteile von Android und iOS am Absatz von Smartphones in Deutschland von Januar 2012 bis März 2020\grqq{}, 03.06.2020}\cite{Tenzer2020}}. Mittlerweile findet es nicht mehr nur in Smartphones, sondern auch in Smartwatches, Tablets und in Fernsehern Verwendung. Die App wurde auf der Version 8.1 (Oreo) entwickelt, ist aber trotzdem für aktuellere Versionen verfügbar.
+Android ist ein von Google Inc. entwickeltes und das meist verbreiteste Betriebsystem auf dem deutschen Markt\footnote{Stand März 2020 laufen ca. 80\% der verfügbaren Geräte mit einem Android Betriebssytem -\textit{Quelle: Statista.com, \glqq{}Vergleich der Marktanteile von Android und iOS am Absatz von Smartphones in Deutschland von Januar 2012 bis März 2020\grqq{}, 03.06.2020}\cite{Tenzer2020}}. Mittlerweile findet es nicht mehr nur in Smartphones, sondern auch in Smartwatches, Tablets und in Fernsehern Verwendung. Die App wurde auf der Version 8.1 (Oreo) entwickelt, ist aber trotzdem zu aktuelleren Versionen kompatibel. \\
+Die aktuellste Android Version ist Android 10. Android 11 folgt im dritten Quartal 2020.
 \chapter{Konzeption}
-Bei dem Entwurf des Graphical User Interfaces (GUI), wurde sich an gängigen Fernsteuerungen aus der Spielbranche orientiert. Auf der linken, sowie auf der rechten, unteren Seite des Displays, lässt sich die Position des Armes im dreidimensionalen Raum (3D) steuern. im oberen Bereich der Anwendung befinden sich Konfigurationspunkte sowie der \glqq{}Switch\grqq{}\footnote{Ein Switch ist in Android ein Kippschalter mit 2 Zuständen}, welcher Steuern des Greifers übernimmt. Die App sollte nur im \glqq{}Landscape\grqq{}-Modus, ausführbar sein. Dabei wurde Wert auf das Einhalten von aktuellen Konventionen, wie einem Settings Menü zum Festlegen von Serverport und -ip und CISCO Standart Symbolen wie dem Netzwerk-Symbol geachtet. Des Weiteren wurde mit dem Erstellen von eigenen Scaleable Vector Graphics (SVG) die Intiutivität unterstützt und eine missverständliche Nutzung der Applikation ausgeschlossen.\\ \\
+Bei dem Entwurf des Graphical User Interfaces (GUI), wurde sich an gängigen Fernsteuerungen aus der Spielbranche und dem Modellbau orientiert. Auf der Linken, sowie auf der rechten, unteren Seite des Displays, lässt sich die Position des Armes im dreidimensionalen Raum (3D) steuern. Im oberen Bereich der Anwendung befinden sich Konfigurationspunkte sowie der \glqq{}Switch\grqq{}\footnote{Ein Switch ist in Android ein Kippschalter mit 2 Zuständen}, welcher das Steuern des Greifers übernimmt. Die App sollte nur im \glqq{}Landscape\grqq{}-Modus, ausführbar sein, dies hat technische- und ergonomische Hintergründe. Dabei wurde Wert auf das Einhalten von aktuellen Konventionen, wie einem Settings Menü zum Festlegen von Serverport und -IP Adresse, als auch auf CISCO Standart Symbolen wie dem Netzwerk-Symbol geachtet. Des Weiteren wurde mit dem Erstellen von eigenen Scaleable Vector Graphics (SVG) die Intiutivität unterstützt und eine missverständliche Nutzung der Applikation ausgeschlossen.\\ \\
 
 %Hier nun Konzeptidee vom Arm und Servercode
 
-Für die Kommunikation zwischen der Applikation und dem \glqq{}Roboterarm\grqq{} soll ein Server als Verbindungsstück verwendet werden. Mit diesem Konzept wird eine asynchrone Kommunikation zwischen Server und Client ermöglicht. Der Client welcher als Sender von Daten dient, kann dem Server, welcher die Daten empfängt, direkt Daten übermitteln. Diese Verbindung wird durch einen TCP Socket gewährleistet. Die gesendeten Informationen der Applikation werden über die auf dem Raspberry PI vorhanden GPIO Pins, an die Servomotoren mittels eines  \glqq{}16-channel 12-bit Servo Driver\grqq{} übertragen. Dieser Treiber ist Notwendig um eine konstante und ausreichende Spannungsquelle für die Motoren zu gewährleisten. Eine direkte Ansteuerung von mehr als einem Motor über die Spannungsquelle des Raspberry PI's ist ungenügend und lässt die Servomotoren zucken oder gar nicht reagieren.
+Für die Kommunikation zwischen der App und dem \glqq{}Roboterarm\grqq{} soll ein Server als Verbindungskomponennte verwendet werden. Mit diesem Konzept wird eine asynchrone Kommunikation zwischen Server und Client ermöglicht. Der Client, welcher als Sender von Daten dient, kann dem Server, welcher die Daten empfängt, direkt Daten übermitteln. Diese Verbindung wird durch einen TCP Socket gewährleistet. Die gesendeten Informationen der Applikation werden über die auf dem Raspberry PI vorhanden GPIO Pins, an die Servomotoren mittels eines  \glqq{}16-channel 12-bit Servo Driver\grqq{} übertragen. Dieser Treiber ist Notwendig um eine konstante und ausreichende Spannungsquelle für die Motoren zu gewährleisten. Eine direkte Ansteuerung von mehr als einem Motor über die Spannungsquelle des Raspberry PI's ist ungenügend und lässt die Servomotoren zucken oder gar nicht reagieren.
 
 
 \chapter{Implementierung}	
 \section{Client}
-Für die Entwicklung einer nativen Android App wird die Entwicklungsumgebung Android Studio benötigt. Des Weiteren wird für die Softwareversionsverwaltung auf die Plattform Github zurückgegriffen, wo der Quellcode des Projektes dokumentiert ist\footnote{https://github.com/JoProt/User-Interface-Project}. Aus dem Grund, dass die Verbindung zu dem Roboter Arm über das Internet realisiert wurde, ist es notwendig in dem Manifest der Applikation die Internetberechtigung zu erteilen. \\
+Für die Entwicklung einer nativen Android App wird die Entwicklungsumgebung Android Studio benötigt. Des Weiteren wird für die Softwareversionsverwaltung auf die Plattform Github zurückgegriffen, wo der Quellcode des Projektes dokumentiert ist\footnote{https://github.com/JoProt/User-Interface-Project}. Aus dem Grund, dass die Verbindung zu dem Roboter Arm über das Internet realisiert wurde, ist es notwendig in dem Manifest der Anwendung die Internetberechtigung zu erteilen. \\
 \begin{lstlisting}
 <uses-permission android:name="android.permission.INTERNET" />
 \end{lstlisting}
 
 Damit ist es möglich auf das mobile Netz des Smartphones zuzugreifen. Um eine Verbindung aufzubauen, benötigt der Client, in diesem Fall die App, die Adresse und den Port des Hosts, in diesem Fall der Server auf dem Raspberry Pi. \\
 Die Parameter für die Verbindung (IP und Port des Hosts), lassen sich dynmaisch (zur Laufzeit) in der App einsehen und anpassen. Dadurch ist es in der Theorie möglich, mehrere Roboter nacheinander zu steuern. 
-Damit das ankommende Signal, welches von die Knöpfen und der Switch senden korrekt interpretiert wird, sendet die App einen eindeutigen, einstelligen Integer Code. Dadurch lassen sich die Bewegungen der Motoren durch den korrekten Knopf in der App abbilden. \\ \\
-Da Pfeile als Bewegungsindikatoren im 3D Raum leicht missverstanden werden können, wurden eigene SVGs erstellt, welche die Bewegung des Arms verdeutlichen. \\
+Damit das ankommende Signal, welches die Knöpfen und der Switch senden, korrekt interpretiert wird, sendet die App einen eindeutigen, einstelligen Integer Code. Dadurch lassen sich die Bewegungen der Motoren durch den korrekten Knopf in der App abbilden. \\ \\
+Da Pfeile als Bewegungsindikatoren im 3D Raum leicht missverstanden werden können, wurden eigene SVGs erstellt, welche die Bewegung des Arms verdeutlichen. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.3]{pictures/robissvg.jpg}
 	\caption{SVG der Knöpfe aus der App \textit{- Quelle: Eigene Darstellung}}
 \end{figure}
 \newpage
+SVG hat den Vorteile, dass die Kanten und Formen in der Bildebene mathematisch berechnet werden. So lässt siche diese Grafik beliebig skalieren. \\
 In Abbildung 4.1 sind die einzelnen Grafiken für die jeweilige Bewegung des Roboters aufgelistet, wobei $\leftarrow$ und $\rightarrow$ für Steuerung auf einer horizontal Linie, $\uparrow$ und $\downarrow$ für vertikale Bewegungen und $\curvearrowleft$ und $\curvearrowright$ für Bewegung um die eigene Hochachse verantwortlich sind.
 
 \section{Roboterarm}
@@ -270,7 +273,7 @@ Der Arm wurde von einem selbstgebauten 3D-Drucker über 25 Stunden gedruckt und 
 Der Arm hat an vier Punkten die Servomotoren implementiert und kann sich dadurch wie in Abschnitt 4.1 beschrieben in mehrere Richtungen bewegen. Die Motorsteuerung funktioniert über ein 16-channel 12-bit Servo Driver-Board, genaueres zu diesem Bauteil ist unter dem Abschnitt 2.1 zu lesen.
 \newpage
 \section{Server}
-Für den Server und die Ansteuerung des Roboterarms wurde die Programmiersprache Python verwendet.\cite{PiHandbuch} Die Verbindung zum Server wird über eine Socket Verbindung gewährleistet, das bedeutet, es wird eine direkte Verbindung zwischen Client und Server aufgebaut, die solange aktiv ist bis einer der beiden Partner die Verbindung trennt. Eine Aktive Trennung findet in dieser Implementierung nur durch den Client statt. Wie im folgenden Codeauszug zu sehen ist, wird eine Verbindung aufgebaut, gehalten. Es werden Daten empfangen, welche an die Roboterarmsteuerungsmethode weitergeleitet werden.
+Für den Server und die Ansteuerung des Roboterarms wurde die Programmiersprache Python verwendet\cite{PiHandbuch}. Die Verbindung zum Server wird über eine Socket Verbindung gewährleistet, das bedeutet, es wird eine direkte Verbindung zwischen Client und Server aufgebaut, die solange aktiv ist bis einer der beiden Partner die Verbindung trennt. Eine Aktive Trennung findet in dieser Implementierung nur durch den Client statt. Wie im folgenden Codeauszug zu sehen ist, wird eine Verbindung aufgebaut, gehalten. Es werden Daten empfangen, welche an die Roboterarmsteuerungsmethode weitergeleitet werden.
 \begin{lstlisting}
 # Server Init and Loop ---
 serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -313,13 +316,13 @@ Wenn ein Datenstrom vom Client gesendet wird, wird dieser durch den Server valid
 
 \chapter{Fehlschläge}
 %(\textbf{hier musst du unbedingt noch Quellen angeben. Du sagst selbst im Text das du vorher kein Wissen hattest, aber worher hast du das denn jetzt genimmen? such bitte noch min. eine weitere Quelle raus. am Besten 2.  Wenn du willst, kannst du mein Raspberry Pi Buch auch als Quelle nutzen dann gebe ich dir die daten durch.}) \\ \\ \\ \\
-Für die Server-Arm Steuerung wurden mehrere Ansätze ausgetestet. Zum einen war das Wissen wie solche Motoren und Systeme funktionieren nicht vorhanden. Dadurch sind Probleme wie zuckende, nicht reagierende Servomotoren und Fehlansteuerungen entstanden. Erst bei der Betrachtung das die Spannungsquelle ungenügend sein könnte wurde recherchiert\cite{I2C} und Lösungen betrachtet. 
+Für die Server-Arm Steuerung wurden mehrere Ansätze ausgetestet. Zum Einen war das Wissen, wie solche Motoren und Systeme funktionieren nicht vorhanden. Dadurch sind Probleme wie zuckende, nicht reagierende Servomotoren und Fehlansteuerungen entstanden. Erst bei der Betrachtung, dass die Spannungsquelle ungenügend sein könnte, wurde recherchiert\cite{I2C} und Lösungen betrachtet. 
 
-Neben den Motorproblemen stellte die Verbindung eine kleines Problem dar. Die Fernsteuerung über das Internet war ein Plan der dieses Projekt bereichern sollte, auch wenn es keinen Mehrwert bietet. Erst als beim betrachten des Portforwardings, konnte festgestellt werden das der genutzte Port freigeschaltet werden muss.
+Zum Anderen stellte die Verbindung ein Problem dar. Erst beim betrachten des Portforwardings, konnte festgestellt werden das der genutzte Port zuerst freigeschaltet werden muss.
 \chapter{Zusammenfassung}	
-In diesem Projekt haben wir uns mit den Grundlagen der Entwicklung eines User Interfaces auseinandergesetzt und eine ansprechende und intuitiv zu bedienende App entwickelt. Mit Hilfe unseres Wissens aus weiteren Modulen, wie zum Beispiel \glqq{}Programmierung Mobiler Endgeräte\grqq{} und \glqq{}Echtzeit- und Netzwerktprogrammierung\grqq{}, war es uns möglich eine Android Anwendung zu schreiben um einen 3D gedruckten Roboter Arm zusteuern. 
+In diesem Projekt haben wir uns mit den Grundlagen der Entwicklung eines User Interfaces auseinandergesetzt und eine ansprechende und intuitiv zu bedienende App entwickelt. Mit Hilfe unseres Wissens aus weiteren Modulen, wie zum Beispiel \glqq{}Programmierung Mobiler Endgeräte\grqq{} und \glqq{}Echtzeit- und Netzwerktprogrammierung\grqq{}, war es uns möglich eine Android Anwendung zu schreiben, um den Roboter Arm zusteuern. 
 \\
-In der Zeit der Digitalisierung, in der Computer immer mehr Teil unseres Alltags werden ist es das Ziel, dass die Maschinen für den Menschen eine Arbeitserleichterung und keine Last werden. Desshalb ist es umso wichtiger, mit einem qualitativem User Interface zu arbeiteten. Dieses vergleichsweise kleine Projekt hat uns gezeigt wie aufwendig der Prozess der Gestaltung einer hochwertigen Oberfläche ist.\\ \\
+In der Zeit der Digitalisierung, in der Computer immer mehr Teil unseres Alltags werden ist es das Ziel, dass die Maschinen für den Menschen eine Arbeitserleichterung und keine zusätzliche Last werden. Desshalb ist es umso wichtiger, mit einem qualitativem User Interface zu arbeiteten. Dieses vergleichsweise kleine Projekt hat uns gezeigt wie aufwendig der Prozess der Gestaltung einer hochwertigen Oberfläche ist.\\ \\
 Gerade dann, wenn eine Anwendung veröffentlicht und von mehreren Menschen genutzt wird, ist es wichtig, dass es das Leben erleichtert und nicht verkompliziert.
 \pagenumbering{roman}
 
