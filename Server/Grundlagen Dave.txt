@@ -1,0 +1,30 @@
+- 3D Druck (Privatanwendung)
+
+3D Druck ist eine Technologie die seit Jahren von der Industrie als auch von Privatandwendern betrieben, verbessert und erweitert wird. Diese Art des druckens umfasst sämtliche Verfahren in denen Material Schicht auf Schicht gedruckt wird.
+Für dieses Verfahren benötigt man einen sogenannten 3D-Drucker. Ein handelsüblicher 3D-Drucker besitzt in der Standartvariante 4-Achsenbewegungsmotoren, 1 Extudermotoren, ein Heibbett, ein Controllerboard, ein Hotend und einen Rahmen indem alle Bauteile verankert sind, sowie eine Spannungsquelle.
+Für das Drucken von 3D Objekten sind neben einem Drucker auch Druckmaterial sowie ein Slicingprogramm nötig. Je nach Druckerart können verschiedenste Material verwendet werden. Das herkömmlichste Material ist PLA(Polylactide), diese Polymere zählen zu den Polyestern und lassen sich am einfachsten drucken.
+Um 3D Modelle drucken zu können ist neben den Model an sich ein Slicingprogramm nötig. Bei solch einem Programm werden die Modelle auf einem virtuellem Druckbett positioniert und in einzelne Schichten zerlegt. Je nach dem wie groß eine Schicht ist desto detailierter ist das gedruckte Produkt. Aktuelle Drucker sind in der Lage eine schichthöhe von 0,1 mm erreichen.
+Ein Druck wird im 3D Raum aufgebaut. Es gibt 3 Achsen, welche sich horizontal (X, Y Achse) und vertikal bewegen (Z-Achse). Diese Bewegungen werden durch Motoren ausgeführt um das Material in das Hotend zu drücken wird ein Extudermotor benötigt.
+
+
+-> Beispieldruckablauf
+Nachdem der Drucker die Datei, mit dem gesliceten Druckmodel geladen hat, findet die Vorbereitung des druckers automatisch statt.
+Das Druckbett/Heizbett wird auf 60°C vorgeheizt, damit das Material besser an der Druckfläche haftet.
+Währenddessen wird das Hotend auf eine Betriebstemperatur von ca 215°C erhitzt, damit das Material formbar wird um Scicht für Schicht aufgetragen werden zu können.
+Sind die Endtemperaturen erreicht, werden die einzelnen befehle aus der geslicten Datei geladen. (Diese Beinhaltet befehle für die Motoren)
+Schicht für Schicht wird das Material aufgetragen, welches sich sofort verhärtet.
+
+
+
+- Hardware Komponenten:
+    -> Raspberry Pi
+	Ist ein Einplantinencomputer, welches mit einem Unix Betriebssystem läuft. Der Raspberry PI bietet neben seinen günstigern Preis ein leistungsstarkes , welches durch seine Ansteuerungspins eine ähnlichkeit zu einem Arduino zeigt.
+	Diese Pins machen es möglich externe Compneten anzusteuern oder Informationen zu empfangen. Dadurch sind etliche Projekte wie zum Beispiel: eine Aquariumsanzeige, SmartHome Steuerung und vieles mehr möglich.
+    -> Servo Motoren
+	Servomotor sind spezielle Elektromotoren. Diese Motoren besitzen die Möglichkeit die Kontrolle der Winkelposition ihrer Motorwelle sowie der Drehgeschwindigkeit und Beschleunigung erlauben. Sie bestehen aus einem Elektromotor, der zusätzlich mit einem Sensor zur Positionsbestimmung ausgestattet ist.
+    -> 16-channel 12-bit Servo Driver
+	Dieses Modul bietet eine Steuerung von mehreren Servo Motoren gleichzeitig. Durch eine externe Spannungquelle sind bis zu 16 5V Servo Motoren anschließbar.
+	
+	
+- Client Server 
+Dieses Konzept ermöglicht eine asynchrone Kommunikation zwischen Server und Client. Der Client welcher als Sender von Daten dient kann dem Server welcher die Daten empfängt direkt etwas mitteilen. Diese Verbindung wird durch einen TCP socket gewährleistet.

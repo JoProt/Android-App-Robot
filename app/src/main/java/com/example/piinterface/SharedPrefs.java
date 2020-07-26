@@ -1,5 +1,6 @@
 package com.example.piinterface;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -11,17 +12,16 @@ public class SharedPrefs {
     private SharedPreferences.Editor sEditor;
 
     public SharedPrefs(Context context) {
-
         sharedPreferences = context.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE);
         sEditor = sharedPreferences.edit();
     }
 
     public String getIP(){
-        return sharedPreferences.getString(IP_ADRESSE_KEY,"");
+        return sharedPreferences.getString(IP_ADRESSE_KEY,"192.168.178.29");
     }
 
     public int getPort (){
-        return sharedPreferences.getInt(PORT_NUMBER_KEY,0);
+        return sharedPreferences.getInt(PORT_NUMBER_KEY,5556);
     }
 
     public void setIP(String ip){
@@ -31,5 +31,11 @@ public class SharedPrefs {
     public void setPort(int port){
         sEditor.putInt(PORT_NUMBER_KEY,port);
         sEditor.apply();
-    }
+     }
+     public MyIpAdressWithPort getIpAndPort(){
+        MyIpAdressWithPort helper = new MyIpAdressWithPort();
+        helper.setIpAdress(getIP());
+        helper.setPort(getPort());
+        return helper;
+     }
 }
