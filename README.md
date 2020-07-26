@@ -1,9 +1,4 @@
-# User-Interface-Project
-Student project developed by David Taube and Josef Prothmann in the Course "User Interfaces".
 
+### Aktueller Stand
 
-
-
-### Aktueller Gui Stand
-
-![alt text](https://github.com/JoProt/User-Interface-Project/blob/UI/GUI.jpeg)
+(https://github.com/JoProt/User-Interface-Project/blob/documentation/projektarbeit/semesterarbeit_v1.pdf)
